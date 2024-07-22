@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinmeierMigratorService", "WinmeierMigratorService", "{0E93485A-B587-4ED0-9EC9-E093206AA31A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinmeierDatawareHouseClient", "WinmeierDatawareHouseClient", "{2361144D-4332-4BA7-B1C4-D223FCEEF3A1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinmeierMigratorService", "WinmeierMigratorService\WinmeierMigratorService.csproj", "{090AF73B-7295-466F-B6D3-88F1A3F30D6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinmeierDatawareHouseClient", "WinmeierDatawareHouseClient\WinmeierDatawareHouseClient.csproj", "{473A1BBF-BF70-4D5E-BEAC-17B0863A36BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{090AF73B-7295-466F-B6D3-88F1A3F30D6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{090AF73B-7295-466F-B6D3-88F1A3F30D6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{090AF73B-7295-466F-B6D3-88F1A3F30D6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{090AF73B-7295-466F-B6D3-88F1A3F30D6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{473A1BBF-BF70-4D5E-BEAC-17B0863A36BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{473A1BBF-BF70-4D5E-BEAC-17B0863A36BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{473A1BBF-BF70-4D5E-BEAC-17B0863A36BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{473A1BBF-BF70-4D5E-BEAC-17B0863A36BF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{090AF73B-7295-466F-B6D3-88F1A3F30D6C} = {0E93485A-B587-4ED0-9EC9-E093206AA31A}
+		{473A1BBF-BF70-4D5E-BEAC-17B0863A36BF} = {2361144D-4332-4BA7-B1C4-D223FCEEF3A1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5806D828-5183-412A-BAC9-5AA49B02599E}
+	EndGlobalSection
+EndGlobal

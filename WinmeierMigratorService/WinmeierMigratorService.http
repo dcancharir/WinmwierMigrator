@@ -1,0 +1,6 @@
+@WinmeierMigratorService_HostAddress = http://localhost:5015
+
+GET {{WinmeierMigratorService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

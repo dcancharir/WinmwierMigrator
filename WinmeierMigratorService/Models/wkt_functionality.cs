@@ -1,0 +1,18 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
+
+namespace WinmeierMigratorService.Models;
+
+public partial class wkt_functionality
+{
+    [Key]
+    public int fun_function_id { get; set; }
+
+    [StringLength(50)]
+    public string fun_name { get; set; } = null!;
+
+    public int fun_enabled { get; set; }
+}
