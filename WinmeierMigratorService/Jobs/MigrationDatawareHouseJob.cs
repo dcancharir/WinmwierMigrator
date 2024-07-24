@@ -27,50 +27,49 @@ public class MigrationDatawareHouseJob : IJob
     public Task Execute(IJobExecutionContext context)
     {
 		//Inicio Jobs
-		//account_movements_migration
+		account_documents_migration();
 		account_movements_migration();
-        return Task.CompletedTask;
-    }
-    internal void account_documents_migration(List<LastInsertedModel> lastInsertedList)
-    {
-        try
-        {
-            string uri = $"{urlDataWareHouse}/api/account_documents_save";
-            var lastValueInserted = lastInsertedList.Where(x => x.TableName == "account_documents").First();
-            if(lastValueInserted != null)
-            {
-                var lastValue = Convert.ToInt64(lastValueInserted.LastInsertedValue == null ? 0 : lastValueInserted.LastInsertedValue);
-                var totalForMigration = _context.account_documents.Where(x=>x.ad_account_id == lastValue).Count();
-                var batchCount = (totalForMigration + batchSize - 1) / batchSize;
-                for(int i = 0; i < batchCount; i++)
-                {
-                    int intentos = 100;
-                    var startIndex = i * batchSize;
-                    var batch = _context.account_documents.Where(x=>x.ad_account_id >= lastValue).Skip(startIndex).Take(batchSize).ToList();
-                    while(intentos > 0)
-                    {
-                        object oEnvio = new
-                        {
-                            data = batch,
-                        };
-                        var respuestaMigracion = DataWareHousePostWithListReturned(oEnvio,uri);
-                        if(respuestaMigracion!=null && respuestaMigracion.Count>0)
-                        {
-                            intentos = 0;
-                        } else
-                        {
-                            intentos--;
-                            Task.Delay(milisecondsToWait).Wait();
-                        }
-                    }
-                }
+		account_operations_migration();
+		account_promotions_migration();
+		accounts_migration();
 
-            }
-        } catch(Exception ex)
-        {
-            _logger.LogError($"account_documents_migration {ex.Message}");
-        }
+		return Task.CompletedTask;
     }
+    internal void account_documents_migration()
+    {
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/account_documents";
+			var lastCreated = GetLastCreated($"{urlDataWareHouse}api/migration/account_documents_save");
+			int totalForMigration = lastCreated == null ? _context.account_documents.Count() : _context.account_documents.Where(x => x.ad_created > lastCreated).Count();
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = lastCreated == null ?
+					_context.account_documents.Skip(startIndex).Take(batchSize).ToList() :
+					_context.account_documents.Where(x => x.ad_created >= lastCreated).Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"account_documents_migration {ex.Message}");
+		}
+	}
     internal void account_movements_migration()
     {
         try
@@ -83,13 +82,10 @@ public class MigrationDatawareHouseJob : IJob
 			{
 				int intentos = 100;
 				var startIndex = i * batchSize;
-				var batch = _context.account_movements.Where(x => x.am_movement_id >= lastId).Skip(startIndex).Take(batchSize).ToList();
+				var data = _context.account_movements.Where(x => x.am_movement_id >= lastId).Skip(startIndex).Take(batchSize).ToList();
 				while(intentos > 0)
 				{
-					object oEnvio = new
-					{
-						data = batch,
-					};
+					object oEnvio = data;
 					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
 					if(respuestaMigracion == true)
 					{
@@ -107,7 +103,108 @@ public class MigrationDatawareHouseJob : IJob
 			_logger.LogError($"account_movements_migration {ex.Message}");
         }
     }
-    internal long GetLastId(string uri)
+	internal void account_operations_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/account_operations_save";
+			var lastId = GetLastId($"{urlDataWareHouse}api/migration/account_operations");
+			var totalForMigration = _context.account_operations.Where(x => x.ao_operation_id >= lastId).Count();
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = _context.account_operations.Where(x => x.ao_operation_id >= lastId).Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"account_operations_migration {ex.Message}");
+		}
+	}
+	internal void account_promotions_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/account_promotions_save";
+			var lastId = GetLastId($"{urlDataWareHouse}api/migration/account_promotions");
+			var totalForMigration = _context.account_promotions.Where(x => x.acp_unique_id >= lastId).Count();
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = _context.account_promotions.Where(x => x.acp_unique_id >= lastId).Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"account_promotions_migration {ex.Message}");
+		}
+	}
+	internal void accounts_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/accounts_save";
+			var lastCreated = GetLastCreated($"{urlDataWareHouse}api/migration/accounts");
+			int totalForMigration = lastCreated == null? _context.accounts.Count() : _context.accounts.Where(x => x.ac_created > lastCreated).Count();
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = lastCreated == null ? 
+					_context.accounts.Skip(startIndex).Take(batchSize).ToList() : 
+					_context.accounts.Where(x => x.ac_created >= lastCreated).Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"accounts_migration {ex.Message}");
+		}
+	}
+	internal long GetLastId(string uri)
     {
 		using(HttpClient httpClient = new HttpClient())
 		{
@@ -125,7 +222,25 @@ public class MigrationDatawareHouseJob : IJob
 		}
 		return 0;
 	}
-    internal bool DataWarehouseSave(object oEnvio, string uri)
+	internal DateTime? GetLastCreated(string uri)
+	{
+		using(HttpClient httpClient = new HttpClient())
+		{
+			httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+			//var stringContent = new StringContent(JsonConvert.SerializeObject(""), Encoding.UTF8, "application/json");
+			using(HttpResponseMessage httpResponse = httpClient.GetAsync($"{uri}").Result)
+			{
+				if(httpResponse.IsSuccessStatusCode)
+				{
+					var result = httpResponse.Content.ReadAsStringAsync().Result;
+					var jsonResult = JsonConvert.DeserializeObject<DateTime?>(result);
+					return jsonResult;
+				}
+			}
+		}
+		return null;
+	}
+	internal bool DataWarehouseSave(object oEnvio, string uri)
     {
 		using(HttpClient httpClient = new HttpClient())
 		{
@@ -143,26 +258,4 @@ public class MigrationDatawareHouseJob : IJob
 		}
 		return false;
 	}
-    List<LastInsertedModel> GetLastInserted()
-    {
-        return new List<LastInsertedModel> { new LastInsertedModel() };
-    }
-    public List<string>? DataWareHousePostWithListReturned(object oEnvio, string uri)
-    {
-        using(HttpClient httpClient = new HttpClient())
-        {
-            httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-            var stringContent = new StringContent(JsonConvert.SerializeObject(oEnvio), Encoding.UTF8, "application/json");
-            using(HttpResponseMessage httpResponse = httpClient.PostAsync($"{uri}", stringContent).Result)
-            {
-                if(httpResponse.IsSuccessStatusCode)
-                {
-                    var result = httpResponse.Content.ReadAsStringAsync().Result;
-                    var jsonResult = JsonConvert.DeserializeObject<List<string>>(result);
-                    return jsonResult;
-                }
-            }
-        }
-        return new List<string>();
-    }
 }
