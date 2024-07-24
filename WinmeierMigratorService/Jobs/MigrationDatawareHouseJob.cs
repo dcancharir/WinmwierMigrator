@@ -11,9 +11,9 @@ namespace WinmeierMigratorService.Jobs;
 public class MigrationDatawareHouseJob : IJob
 {
     private readonly wgdb_000Context _context;
-    private readonly int batchSize = 10;
+    private readonly int batchSize = 1000;
     private string urlDataWareHouse = string.Empty;
-    private readonly int milisecondsToWait = 5000;
+    private readonly int milisecondsToWait = 1000;
     private readonly ILogger<MigrationDatawareHouseJob> _logger;
 	public IConfiguration _configuration;
 	public MigrationDatawareHouseJob(wgdb_000Context context, ILogger<MigrationDatawareHouseJob> logger,IConfiguration configuration)
@@ -41,15 +41,16 @@ public class MigrationDatawareHouseJob : IJob
 		{
 			string uri = $"{urlDataWareHouse}api/migration/account_documents";
 			var lastCreated = GetLastCreated($"{urlDataWareHouse}api/migration/account_documents_save");
-			int totalForMigration = lastCreated == null ? _context.account_documents.Count() : _context.account_documents.Where(x => x.ad_created > lastCreated).Count();
-			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			int totalForMigration = lastCreated == null ? _context.account_documents.Count() : _context.account_documents.Where(x => x.ad_created >= lastCreated).Count();
+			var batchCount = (totalForMigration + 10 - 1) / 10;
+			_logger.LogInformation($"account_documents_migration total for migration : {totalForMigration}");
 			for(int i = 0; i < batchCount; i++)
 			{
 				int intentos = 100;
-				var startIndex = i * batchSize;
+				var startIndex = i * 10;
 				var data = lastCreated == null ?
-					_context.account_documents.Skip(startIndex).Take(batchSize).ToList() :
-					_context.account_documents.Where(x => x.ad_created >= lastCreated).Skip(startIndex).Take(batchSize).ToList();
+					_context.account_documents.Skip(startIndex).Take(10).ToList() :
+					_context.account_documents.Where(x => x.ad_created >= lastCreated).Skip(startIndex).Take(10).ToList();
 				while(intentos > 0)
 				{
 					object oEnvio = data;
@@ -78,6 +79,7 @@ public class MigrationDatawareHouseJob : IJob
             var lastId = GetLastId($"{urlDataWareHouse}api/migration/account_movements");
             var totalForMigration = _context.account_movements.Where(x => x.am_movement_id >= lastId).Count();
 			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"account_movements_migration total for migration : {totalForMigration}");
 			for(int i = 0; i < batchCount; i++)
 			{
 				int intentos = 100;
@@ -111,6 +113,7 @@ public class MigrationDatawareHouseJob : IJob
 			var lastId = GetLastId($"{urlDataWareHouse}api/migration/account_operations");
 			var totalForMigration = _context.account_operations.Where(x => x.ao_operation_id >= lastId).Count();
 			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"account_operations_migration total for migration : {totalForMigration}");
 			for(int i = 0; i < batchCount; i++)
 			{
 				int intentos = 100;
@@ -144,6 +147,7 @@ public class MigrationDatawareHouseJob : IJob
 			var lastId = GetLastId($"{urlDataWareHouse}api/migration/account_promotions");
 			var totalForMigration = _context.account_promotions.Where(x => x.acp_unique_id >= lastId).Count();
 			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"account_promotions_migration total for migration : {totalForMigration}");
 			for(int i = 0; i < batchCount; i++)
 			{
 				int intentos = 100;
@@ -177,6 +181,7 @@ public class MigrationDatawareHouseJob : IJob
 			var lastCreated = GetLastCreated($"{urlDataWareHouse}api/migration/accounts");
 			int totalForMigration = lastCreated == null? _context.accounts.Count() : _context.accounts.Where(x => x.ac_created > lastCreated).Count();
 			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"accounts_migration total for migration : {totalForMigration}");
 			for(int i = 0; i < batchCount; i++)
 			{
 				int intentos = 100;

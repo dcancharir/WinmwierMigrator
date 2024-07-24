@@ -38,4 +38,11 @@ public class WeatherForecastController : ControllerBase
         var data = _context.account_movements.Take(1).ToArray();
         return Ok(data);
     }
+    [HttpGet]
+    [Route("get_account_documents/{quantity}")]
+    public IActionResult get_account_documents(int quantity)
+    {
+		var data = _context.account_documents.Take(quantity).ToArray();
+		return Ok(data);
+	}
 }
