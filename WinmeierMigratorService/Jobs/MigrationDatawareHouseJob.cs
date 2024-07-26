@@ -55,6 +55,28 @@ public class MigrationDatawareHouseJob : IJob
 		customer_records_migration();
 		customer_records_history_migration();
 		customers_migration();
+		daily_meters_migration();
+		draw_tickets_migration();
+		draws_migration();
+		event_history_migration();
+		game_meters_migration();
+		games_migration();
+		general_params_migration();
+		gift_instances_migration();
+		gui_audit_migration();
+		gui_profile_forms_migration();
+		gui_users_migration();
+		h_m2d_smh_migration();
+		h_m2d_tmh_migration();
+		h_pvh_migration();
+		h_t2d_smh_migration();
+		h_t2d_tmh_migration();
+		h_w2d_smh_migration();
+		h_w2d_tmh_migration();
+		h_x2d_control_migration();
+		h_y2d_smh_migration();
+		h_y2d_tmh_migration();
+
 		return Task.CompletedTask;
     }
     internal void account_documents_migration()
@@ -1021,6 +1043,739 @@ public class MigrationDatawareHouseJob : IJob
 		} catch(Exception ex)
 		{
 			_logger.LogError($"customers_migration {ex.Message}");
+		}
+	}
+	internal void daily_meters_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/daily_meters_save";
+			var lastCreated = GetLastCreated($"{urlDataWareHouse}api/migration/daily_meters");
+			int totalForMigration = lastCreated == null ? _context.daily_meters.Count() : _context.daily_meters.Where(x => x.Date > lastCreated).Count();
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"daily_meters_migration total for migration : {totalForMigration}");
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = lastCreated == null ?
+					_context.daily_meters.Skip(startIndex).Take(batchSize).ToList() :
+					_context.daily_meters.Where(x => x.Date >= lastCreated).Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"daily_meters_migration {ex.Message}");
+		}
+	}
+	internal void draw_tickets_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/draw_tickets_save";
+			var lastId = GetLastId($"{urlDataWareHouse}api/migration/draw_tickets");
+			var totalForMigration = _context.draw_tickets.Where(x => x.dt_id >= lastId).Count();
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"draw_tickets_migration total for migration : {totalForMigration}");
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = _context.draw_tickets.Where(x => x.dt_id >= lastId).Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"draw_tickets_migration {ex.Message}");
+		}
+	}
+	internal void draws_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/draws_save";
+			var lastId = GetLastId($"{urlDataWareHouse}api/migration/draws");
+			var totalForMigration = _context.draws.Where(x => x.dr_id >= lastId).Count();
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"draws_migration total for migration : {totalForMigration}");
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = _context.draws.Where(x => x.dr_id >= lastId).Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"draws_migration {ex.Message}");
+		}
+	}
+	internal void event_history_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/event_history_save";
+			var lastId = GetLastId($"{urlDataWareHouse}api/migration/event_history");
+			var totalForMigration = _context.event_histories.Where(x => x.eh_event_id >= lastId).Count();
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"event_history_migration total for migration : {totalForMigration}");
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = _context.event_histories.Where(x => x.eh_event_id >= lastId).Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"event_history_migration {ex.Message}");
+		}
+	}
+	internal void game_meters_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/game_meters_save";
+			var total = GetTotal($"{urlDataWareHouse}api/migration/game_meters");
+			var totalLocal = _context.game_meters.Count();
+			int totalForMigration = total == totalLocal ? 0 : totalLocal;
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"game_meters_migration total for migration : {totalForMigration}");
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = _context.game_meters.Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"game_meters_migration {ex.Message}");
+		}
+	}
+	internal void games_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/games_save";
+			var total = GetTotal($"{urlDataWareHouse}api/migration/games");
+			var totalLocal = _context.games.Count();
+			int totalForMigration = total == totalLocal ? 0 : totalLocal;
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"games_migration total for migration : {totalForMigration}");
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = _context.games.Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"games_migration {ex.Message}");
+		}
+	}
+	internal void general_params_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/general_params_save";
+			var total = GetTotal($"{urlDataWareHouse}api/migration/general_params");
+			var totalLocal = _context.general_params.Count();
+			int totalForMigration = total == totalLocal ? 0 : totalLocal;
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"general_params_migration total for migration : {totalForMigration}");
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = _context.general_params.Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"general_params_migration {ex.Message}");
+		}
+	}
+	internal void gift_instances_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/gift_instances_save";
+			var lastId = GetLastId($"{urlDataWareHouse}api/migration/gift_instances");
+			var totalForMigration = _context.gift_instances.Where(x => x.gin_gift_instance_id >= lastId).Count();
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"gift_instances_migration total for migration : {totalForMigration}");
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = _context.gift_instances.Where(x => x.gin_gift_instance_id >= lastId).Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"gift_instances_migration {ex.Message}");
+		}
+	}
+	internal void gui_audit_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/gui_audit_save";
+			var lastCreated = GetLastCreated($"{urlDataWareHouse}api/migration/gui_audit");
+			int totalForMigration = lastCreated == null ? _context.gui_audits.Count() : _context.gui_audits.Where(x => x.ga_datetime > lastCreated).Count();
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"gui_audit_migration total for migration : {totalForMigration}");
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = lastCreated == null ?
+					_context.gui_audits.Skip(startIndex).Take(batchSize).ToList() :
+					_context.gui_audits.Where(x => x.ga_datetime >= lastCreated).Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"gui_audit_migration {ex.Message}");
+		}
+	}
+	internal void gui_profile_forms_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/gui_profile_forms_save";
+			var total = GetTotal($"{urlDataWareHouse}api/migration/gui_profile_forms");
+			var totalLocal = _context.gui_profile_forms.Count();
+			int totalForMigration = total == totalLocal ? 0 : totalLocal;
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"gui_profile_forms_migration total for migration : {totalForMigration}");
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = _context.gui_profile_forms.Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"gui_profile_forms_migration {ex.Message}");
+		}
+	}
+	internal void gui_users_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/gui_users_save";
+			var total = GetTotal($"{urlDataWareHouse}api/migration/gui_users");
+			var totalLocal = _context.gui_users.Count();
+			int totalForMigration = total == totalLocal ? 0 : totalLocal;
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"gui_users_migration total for migration : {totalForMigration}");
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = _context.gui_users.Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"gui_users_migration {ex.Message}");
+		}
+	}
+	internal void h_m2d_smh_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/h_m2d_smh_save";
+			var total = GetTotal($"{urlDataWareHouse}api/migration/h_m2d_smh");
+			var totalLocal = _context.h_m2d_smhs.Count();
+			int totalForMigration = total == totalLocal ? 0 : totalLocal;
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"h_m2d_smh_migration total for migration : {totalForMigration}");
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = _context.h_m2d_smhs.Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"h_m2d_smh_migration {ex.Message}");
+		}
+	}
+	internal void h_m2d_tmh_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/h_m2d_tmh_save";
+			var total = GetTotal($"{urlDataWareHouse}api/migration/h_m2d_tmh");
+			var totalLocal = _context.h_m2d_tmhs.Count();
+			int totalForMigration = total == totalLocal ? 0 : totalLocal;
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"h_m2d_tmh_migration total for migration : {totalForMigration}");
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = _context.h_m2d_tmhs.Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"h_m2d_tmh_migration {ex.Message}");
+		}
+	}
+	internal void h_pvh_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/h_pvh_save";
+			var total = GetTotal($"{urlDataWareHouse}api/migration/h_pvh");
+			var totalLocal = _context.h_pvhs.Count();
+			int totalForMigration = total == totalLocal ? 0 : totalLocal;
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"h_pvh_migration total for migration : {totalForMigration}");
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = _context.h_pvhs.Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"h_pvh_migration {ex.Message}");
+		}
+	}
+	internal void h_t2d_smh_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/h_t2d_smh_save";
+			var total = GetTotal($"{urlDataWareHouse}api/migration/h_t2d_smh");
+			var totalLocal = _context.h_t2d_smhs.Count();
+			int totalForMigration = total == totalLocal ? 0 : totalLocal;
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"h_t2d_smh_migration total for migration : {totalForMigration}");
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = _context.h_t2d_smhs.Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"h_t2d_smh_migration {ex.Message}");
+		}
+	}
+	internal void h_t2d_tmh_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/h_t2d_tmh_save";
+			var total = GetTotal($"{urlDataWareHouse}api/migration/h_t2d_tmh");
+			var totalLocal = _context.h_t2d_tmhs.Count();
+			int totalForMigration = total == totalLocal ? 0 : totalLocal;
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"h_t2d_tmh_migration total for migration : {totalForMigration}");
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = _context.h_t2d_tmhs.Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"h_t2d_tmh_migration {ex.Message}");
+		}
+	}
+	internal void h_w2d_smh_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/h_w2d_smh_save";
+			var total = GetTotal($"{urlDataWareHouse}api/migration/h_w2d_smh");
+			var totalLocal = _context.h_w2d_smhs.Count();
+			int totalForMigration = total == totalLocal ? 0 : totalLocal;
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"h_w2d_smh_migration total for migration : {totalForMigration}");
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = _context.h_w2d_smhs.Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"h_w2d_smh_migration {ex.Message}");
+		}
+	}
+	internal void h_w2d_tmh_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/h_w2d_tmh_save";
+			var total = GetTotal($"{urlDataWareHouse}api/migration/h_w2d_tmh");
+			var totalLocal = _context.h_w2d_tmhs.Count();
+			int totalForMigration = total == totalLocal ? 0 : totalLocal;
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"h_w2d_tmh_migration total for migration : {totalForMigration}");
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = _context.h_w2d_tmhs.Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"h_w2d_tmh_migration {ex.Message}");
+		}
+	}
+	internal void h_x2d_control_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/h_x2d_control_save";
+			var total = GetTotal($"{urlDataWareHouse}api/migration/h_x2d_control");
+			var totalLocal = _context.h_x2d_controls.Count();
+			int totalForMigration = total == totalLocal ? 0 : totalLocal;
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"h_x2d_control_migration total for migration : {totalForMigration}");
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = _context.h_x2d_controls.Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"h_x2d_control_migration {ex.Message}");
+		}
+	}
+	internal void h_y2d_smh_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/h_y2d_smh_save";
+			var total = GetTotal($"{urlDataWareHouse}api/migration/h_y2d_smh");
+			var totalLocal = _context.h_y2d_smhs.Count();
+			int totalForMigration = total == totalLocal ? 0 : totalLocal;
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"h_y2d_smh_migration total for migration : {totalForMigration}");
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = _context.h_y2d_smhs.Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"h_y2d_smh_migration {ex.Message}");
+		}
+	}
+	internal void h_y2d_tmh_migration()
+	{
+		try
+		{
+			string uri = $"{urlDataWareHouse}api/migration/h_y2d_tmh_save";
+			var total = GetTotal($"{urlDataWareHouse}api/migration/h_y2d_tmh");
+			var totalLocal = _context.h_y2d_tmhs.Count();
+			int totalForMigration = total == totalLocal ? 0 : totalLocal;
+			var batchCount = (totalForMigration + batchSize - 1) / batchSize;
+			_logger.LogInformation($"h_y2d_tmh_migration total for migration : {totalForMigration}");
+			for(int i = 0; i < batchCount; i++)
+			{
+				int intentos = 100;
+				var startIndex = i * batchSize;
+				var data = _context.h_y2d_tmhs.Skip(startIndex).Take(batchSize).ToList();
+				while(intentos > 0)
+				{
+					object oEnvio = data;
+					var respuestaMigracion = DataWarehouseSave(oEnvio, uri);
+					if(respuestaMigracion == true)
+					{
+						intentos = 0;
+					} else
+					{
+						intentos--;
+						Task.Delay(milisecondsToWait).Wait();
+					}
+				}
+			}
+
+		} catch(Exception ex)
+		{
+			_logger.LogError($"h_y2d_tmh_migration {ex.Message}");
 		}
 	}
 	internal long GetLastId(string uri)
