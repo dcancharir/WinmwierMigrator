@@ -40,7 +40,7 @@ builder.Host.ConfigureLogging(logging =>
         Directory.CreateDirectory(logFolder);
     }
 
-    var logFile = Path.Combine(logFolder, "sorteosala-.log");
+    var logFile = Path.Combine(logFolder, "winmeiermigrator-.log");
     logging.AddSerilog();
     Log.Logger = new LoggerConfiguration()
         .MinimumLevel.Information()

@@ -27,7 +27,7 @@ public class MigrationDatawareHouseJob : IJob
     public Task Execute(IJobExecutionContext context)
     {
 		//Inicio Jobs
-		account_documents_migration();
+		//account_documents_migration();
 		account_movements_migration();
 		account_operations_migration();
 		account_promotions_migration();
@@ -1834,20 +1834,29 @@ public class MigrationDatawareHouseJob : IJob
 	}
 	internal bool DataWarehouseSave(object oEnvio, string uri)
     {
-		using(HttpClient httpClient = new HttpClient())
+		bool response = false;
+		try
 		{
-			httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-			var stringContent = new StringContent(JsonConvert.SerializeObject(oEnvio), Encoding.UTF8, "application/json");
-			using(HttpResponseMessage httpResponse = httpClient.PostAsync($"{uri}", stringContent).Result)
+			using(HttpClient httpClient = new HttpClient())
 			{
-				if(httpResponse.IsSuccessStatusCode)
+				httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+				var stringContent = new StringContent(JsonConvert.SerializeObject(oEnvio), Encoding.UTF8, "application/json");
+				using(HttpResponseMessage httpResponse = httpClient.PostAsync($"{uri}", stringContent).Result)
 				{
-					var result = httpResponse.Content.ReadAsStringAsync().Result;
-					var jsonResult = JsonConvert.DeserializeObject<bool>(result);
-					return jsonResult;
+					if(httpResponse.IsSuccessStatusCode)
+					{
+						var result = httpResponse.Content.ReadAsStringAsync().Result;
+						response = JsonConvert.DeserializeObject<bool>(result);
+						//return jsonResult;
+					}
 				}
 			}
+			return response;
+		} catch(Exception ex)
+		{
+			_logger.LogError($"Method DataWarehouseSave() uri : {uri} - message : {ex.Message}");
+			return false;
 		}
-		return false;
+		
 	}
 }
