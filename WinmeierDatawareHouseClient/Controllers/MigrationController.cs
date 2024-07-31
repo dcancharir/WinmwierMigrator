@@ -2296,4 +2296,659 @@ public class MigrationController : ControllerBase
 			return Ok(false);
 		}
 	}
+	[HttpGet]
+	[Route("providers_games")]
+	public IActionResult providers_games()
+	{
+		int total;
+		try
+		{
+			total = _context.providers_games.Count();
+			return Ok(total);
+
+		} catch(Exception)
+		{
+			return Ok(0);
+		}
+
+	}
+	[HttpPost]
+	[Route("providers_games_save")]
+	public IActionResult providers_games_save(List<providers_game> data)
+	{
+		try
+		{
+			foreach(var item in data)
+			{
+				Expression<Func<providers_game, bool>> predicate = c =>
+					c.pg_pv_id == item.pg_pv_id &&
+					c.pg_game_id == item.pg_game_id
+				;
+				_context.InsertIfNotExists(item, predicate);
+				_context.SaveChanges();
+			}
+			return Ok(true);
+		} catch(Exception ex)
+		{
+			_logger.LogError($"providers_games_save method -> " + ex.Message);
+			return Ok(false);
+		}
+	}
+	[HttpGet]
+	[Route("sales_per_hour")]
+	public IActionResult sales_per_hour()
+	{
+		long lastId = 0;
+		try
+		{
+			var lastElement = _context.sales_per_hours.OrderByDescending(x => x.sph_unique_id).FirstOrDefault();
+			lastId = lastElement == null ? 0 : lastElement.sph_unique_id;
+
+		} catch(Exception)
+		{
+			lastId = 0;
+		}
+
+		return Ok(lastId);
+	}
+	[HttpPost]
+	[Route("sales_per_hour_save")]
+	public IActionResult sales_per_hour_save(List<sales_per_hour> data)
+	{
+		try
+		{
+			foreach(var item in data)
+			{
+				Expression<Func<sales_per_hour, bool>> predicate = c =>
+				c.sph_unique_id == item.sph_unique_id;
+				_context.InsertIfNotExists(item, predicate);
+				_context.SaveChanges();
+			}
+			return Ok(true);
+		} catch(Exception ex)
+		{
+			_logger.LogError($"sales_per_hour_save method -> " + ex.Message);
+			return Ok(false);
+		}
+	}
+	[HttpGet]
+	[Route("sas_meters_adjustments")]
+	public IActionResult sas_meters_adjustments()
+	{
+		long lastId = 0;
+		try
+		{
+			var lastElement = _context.sas_meters_adjustments.OrderByDescending(x => x.tma_unique_id).FirstOrDefault();
+			lastId = lastElement == null ? 0 : lastElement.tma_unique_id;
+
+		} catch(Exception)
+		{
+			lastId = 0;
+		}
+
+		return Ok(lastId);
+	}
+	[HttpPost]
+	[Route("sas_meters_adjustments_save")]
+	public IActionResult sas_meters_adjustments_save(List<sas_meters_adjustment> data)
+	{
+		try
+		{
+			foreach(var item in data)
+			{
+				Expression<Func<sas_meters_adjustment, bool>> predicate = c =>
+				c.tma_gaming_day == item.tma_gaming_day &&
+				c.tma_terminal_id== item.tma_terminal_id &&
+				c.tma_meter_code == item.tma_meter_code &&
+				c.tma_game_id == item.tma_game_id &&
+				c.tma_denomination == item.tma_denomination &&
+				c.tma_unique_id == item.tma_unique_id
+				;
+				_context.InsertIfNotExists(item, predicate);
+				_context.SaveChanges();
+			}
+			return Ok(true);
+		} catch(Exception ex)
+		{
+			_logger.LogError($"sas_meters_adjustments_save method -> " + ex.Message);
+			return Ok(false);
+		}
+	}
+	[HttpGet]
+	[Route("software_validations")]
+	public IActionResult software_validations()
+	{
+		long lastId = 0;
+		try
+		{
+			var lastElement = _context.software_validations.OrderByDescending(x => x.sval_validation_id).FirstOrDefault();
+			lastId = lastElement == null ? 0 : lastElement.sval_validation_id;
+
+		} catch(Exception)
+		{
+			lastId = 0;
+		}
+
+		return Ok(lastId);
+	}
+	[HttpPost]
+	[Route("software_validations_save")]
+	public IActionResult software_validations_save(List<software_validation> data)
+	{
+		try
+		{
+			foreach(var item in data)
+			{
+				Expression<Func<software_validation, bool>> predicate = c =>
+				c.sval_validation_id == item.sval_validation_id 
+				;
+				_context.InsertIfNotExists(item, predicate);
+				_context.SaveChanges();
+			}
+			return Ok(true);
+		} catch(Exception ex)
+		{
+			_logger.LogError($"software_validations_save method -> " + ex.Message);
+			return Ok(false);
+		}
+	}
+	[HttpGet]
+	[Route("terminal_game_translation")]
+	public IActionResult terminal_game_translation()
+	{
+		DateTime? last_created;
+		try
+		{
+			var lastElement = _context.terminal_game_translations.OrderByDescending(x => x.tgt_created).FirstOrDefault();
+			last_created = lastElement?.tgt_created;
+			return Ok(last_created);
+
+		} catch(Exception)
+		{
+			return Ok(null);
+		}
+	}
+	[HttpPost]
+	[Route("terminal_game_translation_save")]
+	public IActionResult terminal_game_translation_save(List<terminal_game_translation> data)
+	{
+		try
+		{
+			foreach(var item in data)
+			{
+				Expression<Func<terminal_game_translation, bool>> predicate = c => c.tgt_terminal_id == item.tgt_terminal_id && c.tgt_source_game_id == item.tgt_source_game_id;
+				_context.InsertIfNotExists(item, predicate);
+				_context.SaveChanges();
+			}
+			return Ok(true);
+		} catch(Exception ex)
+		{
+			_logger.LogError($"terminal_game_translation_save method -> " + ex.Message);
+			return Ok(false);
+		}
+	}
+	[HttpGet]
+	[Route("terminal_groups")]
+	public IActionResult terminal_groups()
+	{
+		int total;
+		try
+		{
+			total = _context.terminal_groups.Count();
+			return Ok(total);
+
+		} catch(Exception)
+		{
+			return Ok(0);
+		}
+
+	}
+	[HttpPost]
+	[Route("terminal_groups_save")]
+	public IActionResult terminal_groups_save(List<terminal_group> data)
+	{
+		try
+		{
+			foreach(var item in data)
+			{
+				Expression<Func<terminal_group, bool>> predicate = c =>
+					c.tg_terminal_id == item.tg_terminal_id &&
+					c.tg_element_id == item.tg_element_id &&
+					c.tg_element_type == item.tg_element_type
+				;
+				_context.InsertIfNotExists(item, predicate);
+				_context.SaveChanges();
+			}
+			return Ok(true);
+		} catch(Exception ex)
+		{
+			_logger.LogError($"terminal_groups_save method -> " + ex.Message);
+			return Ok(false);
+		}
+	}
+	[HttpGet]
+	[Route("terminal_money")]
+	public IActionResult terminal_money()
+	{
+		int total;
+		try
+		{
+			total = _context.terminal_moneys.Count();
+			return Ok(total);
+
+		} catch(Exception)
+		{
+			return Ok(0);
+		}
+
+	}
+	[HttpPost]
+	[Route("terminal_money_save")]
+	public IActionResult terminal_money_save(List<terminal_money> data)
+	{
+		try
+		{
+			foreach(var item in data)
+			{
+				Expression<Func<terminal_money, bool>> predicate = c =>
+					c.tm_terminal_id == item.tm_terminal_id &&
+					c.tm_transaction_id == item.tm_transaction_id
+				;
+				_context.InsertIfNotExists(item, predicate);
+				_context.SaveChanges();
+			}
+			return Ok(true);
+		} catch(Exception ex)
+		{
+			_logger.LogError($"terminal_money_save method -> " + ex.Message);
+			return Ok(false);
+		}
+	}
+	[HttpGet]
+	[Route("terminal_sas_meters")]
+	public IActionResult terminal_sas_meters()
+	{
+		int total;
+		try
+		{
+			total = _context.terminal_sas_meters.Count();
+			return Ok(total);
+
+		} catch(Exception)
+		{
+			return Ok(0);
+		}
+
+	}
+	[HttpPost]
+	[Route("terminal_sas_meters_save")]
+	public IActionResult terminal_sas_meters_save(List<terminal_sas_meter> data)
+	{
+		try
+		{
+			foreach(var item in data)
+			{
+				Expression<Func<terminal_sas_meter, bool>> predicate = c =>
+					c.tsm_terminal_id == item.tsm_terminal_id &&
+					c.tsm_meter_code == item.tsm_meter_code &&
+					c.tsm_game_id == item.tsm_game_id &&
+					c.tsm_denomination == item.tsm_denomination
+				;
+				_context.InsertIfNotExists(item, predicate);
+				_context.SaveChanges();
+			}
+			return Ok(true);
+		} catch(Exception ex)
+		{
+			_logger.LogError($"terminal_sas_meters_save method -> " + ex.Message);
+			return Ok(false);
+		}
+	}
+	[HttpGet]
+	[Route("terminal_sas_meters_history")]
+	public IActionResult terminal_sas_meters_history()
+	{
+		DateTime? last_created;
+		try
+		{
+			var lastElement = _context.terminal_sas_meters_histories.OrderByDescending(x => x.tsmh_created_datetime).FirstOrDefault();
+			last_created = lastElement?.tsmh_created_datetime;
+			return Ok(last_created);
+
+		} catch(Exception)
+		{
+			return Ok(null);
+		}
+	}
+	[HttpPost]
+	[Route("terminal_sas_meters_history_save")]
+	public IActionResult terminal_sas_meters_history_save(List<terminal_sas_meters_history> data)
+	{
+		try
+		{
+			foreach(var item in data)
+			{
+				Expression<Func<terminal_sas_meters_history, bool>> predicate = c => 
+				c.tsmh_terminal_id == item.tsmh_terminal_id && 
+				c.tsmh_meter_code == item.tsmh_meter_code &&
+				c.tsmh_game_id == item.tsmh_game_id &&
+				c.tsmh_denomination == item.tsmh_denomination &&
+				c.tsmh_type == item.tsmh_type &&
+				c.tsmh_datetime == item.tsmh_datetime
+				;
+				_context.InsertIfNotExists(item, predicate);
+				_context.SaveChanges();
+			}
+			return Ok(true);
+		} catch(Exception ex)
+		{
+			_logger.LogError($"terminal_sas_meters_history_save method -> " + ex.Message);
+			return Ok(false);
+		}
+	}
+	[HttpGet]
+	[Route("terminals")]
+	public IActionResult terminals()
+	{
+		long lastId = 0;
+		try
+		{
+			var lastElement = _context.terminals.OrderByDescending(x => x.te_terminal_id).FirstOrDefault();
+			lastId = lastElement == null ? 0 : lastElement.te_terminal_id;
+
+		} catch(Exception)
+		{
+			lastId = 0;
+		}
+
+		return Ok(lastId);
+	}
+	[HttpPost]
+	[Route("terminals_save")]
+	public IActionResult terminals_save(List<terminal> data)
+	{
+		try
+		{
+			foreach(var item in data)
+			{
+				Expression<Func<terminal, bool>> predicate = c =>
+				c.te_terminal_id == item.te_terminal_id
+				;
+				_context.InsertIfNotExists(item, predicate);
+				_context.SaveChanges();
+			}
+			return Ok(true);
+		} catch(Exception ex)
+		{
+			_logger.LogError($"terminals_save method -> " + ex.Message);
+			return Ok(false);
+		}
+	}
+	[HttpGet]
+	[Route("terminals_connected")]
+	public IActionResult terminals_connected()
+	{
+		DateTime? last_created;
+		try
+		{
+			var lastElement = _context.terminals_connecteds.OrderByDescending(x => x.tc_date).FirstOrDefault();
+			last_created = lastElement?.tc_date;
+			return Ok(last_created);
+
+		} catch(Exception)
+		{
+			return Ok(null);
+		}
+	}
+	[HttpPost]
+	[Route("terminals_connected_save")]
+	public IActionResult terminals_connected_save(List<terminals_connected> data)
+	{
+		try
+		{
+			foreach(var item in data)
+			{
+				Expression<Func<terminals_connected, bool>> predicate = c =>
+				c.tc_date == item.tc_date &&
+				c.tc_master_id == item.tc_master_id 
+				;
+				_context.InsertIfNotExists(item, predicate);
+				_context.SaveChanges();
+			}
+			return Ok(true);
+		} catch(Exception ex)
+		{
+			_logger.LogError($"terminals_connected_save method -> " + ex.Message);
+			return Ok(false);
+		}
+	}
+	[HttpGet]
+	[Route("tickets_audit_status_change")]
+	public IActionResult tickets_audit_status_change()
+	{
+		long lastId = 0;
+		try
+		{
+			var lastElement = _context.tickets_audit_status_changes.OrderByDescending(x => x.tia_id).FirstOrDefault();
+			lastId = lastElement == null ? 0 : lastElement.tia_id;
+
+		} catch(Exception)
+		{
+			lastId = 0;
+		}
+
+		return Ok(lastId);
+	}
+	[HttpPost]
+	[Route("tickets_audit_status_change_save")]
+	public IActionResult tickets_audit_status_change_save(List<tickets_audit_status_change> data)
+	{
+		try
+		{
+			foreach(var item in data)
+			{
+				Expression<Func<tickets_audit_status_change, bool>> predicate = c =>
+				c.tia_id == item.tia_id &&
+				c.tia_validation_number == item.tia_validation_number
+				;
+				_context.InsertIfNotExists(item, predicate);
+				_context.SaveChanges();
+			}
+			return Ok(true);
+		} catch(Exception ex)
+		{
+			_logger.LogError($"tickets_audit_status_change_save method -> " + ex.Message);
+			return Ok(false);
+		}
+	}
+	[HttpGet]
+	[Route("wc2_messages")]
+	public IActionResult wc2_messages()
+	{
+		long lastId = 0;
+		try
+		{
+			var lastElement = _context.wc2_messages.OrderByDescending(x => x.w2m_message_id).FirstOrDefault();
+			lastId = lastElement == null ? 0 : lastElement.w2m_message_id;
+
+		} catch(Exception)
+		{
+			lastId = 0;
+		}
+
+		return Ok(lastId);
+	}
+	[HttpPost]
+	[Route("wc2_messages_save")]
+	public IActionResult wc2_messages_save(List<wc2_message> data)
+	{
+		try
+		{
+			foreach(var item in data)
+			{
+				Expression<Func<wc2_message, bool>> predicate = c =>
+				c.w2m_message_id == item.w2m_message_id
+				;
+				_context.InsertIfNotExists(item, predicate);
+				_context.SaveChanges();
+			}
+			return Ok(true);
+		} catch(Exception ex)
+		{
+			_logger.LogError($"wc2_messages_save method -> " + ex.Message);
+			return Ok(false);
+		}
+	}
+	[HttpGet]
+	[Route("wc2_sessions")]
+	public IActionResult wc2_sessions()
+	{
+		long lastId = 0;
+		try
+		{
+			var lastElement = _context.wc2_sessions.OrderByDescending(x => x.w2s_session_id).FirstOrDefault();
+			lastId = lastElement == null ? 0 : lastElement.w2s_session_id;
+
+		} catch(Exception)
+		{
+			lastId = 0;
+		}
+
+		return Ok(lastId);
+	}
+	[HttpPost]
+	[Route("wc2_sessions_save")]
+	public IActionResult wc2_sessions_save(List<wc2_session> data)
+	{
+		try
+		{
+			foreach(var item in data)
+			{
+				Expression<Func<wc2_session, bool>> predicate = c =>
+				c.w2s_session_id == item.w2s_session_id
+				;
+				_context.InsertIfNotExists(item, predicate);
+				_context.SaveChanges();
+			}
+			return Ok(true);
+		} catch(Exception ex)
+		{
+			_logger.LogError($"wc2_sessions_save method -> " + ex.Message);
+			return Ok(false);
+		}
+	}
+	[HttpGet]
+	[Route("wcp_commands")]
+	public IActionResult wcp_commands()
+	{
+		long lastId = 0;
+		try
+		{
+			var lastElement = _context.wcp_commands.OrderByDescending(x => x.cmd_id).FirstOrDefault();
+			lastId = lastElement == null ? 0 : lastElement.cmd_id;
+
+		} catch(Exception)
+		{
+			lastId = 0;
+		}
+
+		return Ok(lastId);
+	}
+	[HttpPost]
+	[Route("wcp_commands_save")]
+	public IActionResult wcp_commands_save(List<wcp_command> data)
+	{
+		try
+		{
+			foreach(var item in data)
+			{
+				Expression<Func<wcp_command, bool>> predicate = c =>
+				c.cmd_id == item.cmd_id
+				;
+				_context.InsertIfNotExists(item, predicate);
+				_context.SaveChanges();
+			}
+			return Ok(true);
+		} catch(Exception ex)
+		{
+			_logger.LogError($"wcp_commands_save method -> " + ex.Message);
+			return Ok(false);
+		}
+	}
+	[HttpGet]
+	[Route("wkt_resources")]
+	public IActionResult wkt_resources()
+	{
+		long lastId = 0;
+		try
+		{
+			var lastElement = _context.wkt_resources.OrderByDescending(x => x.res_resource_id).FirstOrDefault();
+			lastId = lastElement == null ? 0 : lastElement.res_resource_id;
+
+		} catch(Exception)
+		{
+			lastId = 0;
+		}
+
+		return Ok(lastId);
+	}
+	[HttpPost]
+	[Route("wkt_resources_save")]
+	public IActionResult wkt_resources_save(List<wkt_resource> data)
+	{
+		try
+		{
+			foreach(var item in data)
+			{
+				Expression<Func<wkt_resource, bool>> predicate = c =>
+				c.res_resource_id == item.res_resource_id
+				;
+				_context.InsertIfNotExists(item, predicate);
+				_context.SaveChanges();
+			}
+			return Ok(true);
+		} catch(Exception ex)
+		{
+			_logger.LogError($"wkt_resources_save method -> " + ex.Message);
+			return Ok(false);
+		}
+	}
+	[HttpGet]
+	[Route("wxp_001_messages")]
+	public IActionResult wxp_001_messages()
+	{
+		long lastId = 0;
+		try
+		{
+			var lastElement = _context.wxp_001_messages.OrderByDescending(x => x.wxm_id).FirstOrDefault();
+			lastId = lastElement == null ? 0 : lastElement.wxm_id;
+
+		} catch(Exception)
+		{
+			lastId = 0;
+		}
+
+		return Ok(lastId);
+	}
+	[HttpPost]
+	[Route("wxp_001_messages_save")]
+	public IActionResult wxp_001_messages_save(List<wxp_001_message> data)
+	{
+		try
+		{
+			foreach(var item in data)
+			{
+				Expression<Func<wxp_001_message, bool>> predicate = c =>
+				c.wxm_id == item.wxm_id
+				;
+				_context.InsertIfNotExists(item, predicate);
+				_context.SaveChanges();
+			}
+			return Ok(true);
+		} catch(Exception ex)
+		{
+			_logger.LogError($"wxp_001_messages_save method -> " + ex.Message);
+			return Ok(false);
+		}
+	}
 }
