@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using WinmeierDataWarehouseClient.Context;
 using Serilog;
+using WinmeierDatawareHouseClient.Keops.Context;
+using WinmeierDatawareHouseClient.Winmeier.Context;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,6 +13,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<wgdb_000_winmeierContext>(options =>
 {
 	options.UseSqlServer(builder.Configuration.GetConnectionString("WinmeierConnection"));
+});
+builder.Services.AddDbContext<wgdb_000_keopsContext>(options =>
+{
+	options.UseSqlServer(builder.Configuration.GetConnectionString("KeopsConnection"));
 });
 //logs
 builder.Host.ConfigureLogging(logging =>
@@ -48,6 +53,7 @@ app.UseSwagger();
 app.UseSwaggerUI(c => {
 	c.ConfigObject.AdditionalItems.Add("syntaxHighlight", false);
 	c.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
+	//c.DefaultModelsExpandDepth(-1);
 });
 
 app.UseHttpsRedirection();
