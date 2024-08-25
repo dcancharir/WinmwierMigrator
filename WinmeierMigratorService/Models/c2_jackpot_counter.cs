@@ -16,8 +16,4 @@ public partial class c2_jackpot_counter
 
     [Column(TypeName = "numeric(20, 8)")]
     public decimal c2jc_to_compensate { get; set; }
-
-    [ForeignKey("c2jc_index")]
-    [InverseProperty("c2_jackpot_counter")]
-    public virtual c2_jackpot_instance c2jc_indexNavigation { get; set; } = null!;
 }

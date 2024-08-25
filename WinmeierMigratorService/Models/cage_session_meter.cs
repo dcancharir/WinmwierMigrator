@@ -22,6 +22,9 @@ public partial class cage_session_meter
     [StringLength(3)]
     public string csm_iso_code { get; set; } = null!;
 
+    [Key]
+    public int csm_cage_currency_type { get; set; }
+
     [Column(TypeName = "money")]
     public decimal csm_value { get; set; }
 
@@ -30,7 +33,4 @@ public partial class cage_session_meter
 
     [Column(TypeName = "money")]
     public decimal csm_value_out { get; set; }
-
-    [Key]
-    public int csm_cage_currency_type { get; set; }
 }

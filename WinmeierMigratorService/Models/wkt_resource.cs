@@ -20,7 +20,4 @@ public partial class wkt_resource
 
     [MaxLength(50)]
     public byte[]? res_hash { get; set; }
-
-    [InverseProperty("ascr_resource")]
-    public virtual ICollection<wkt_ad_step_detail> wkt_ad_step_details { get; set; } = new List<wkt_ad_step_detail>();
 }

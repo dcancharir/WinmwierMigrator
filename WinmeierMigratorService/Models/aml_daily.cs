@@ -18,13 +18,13 @@ public partial class aml_daily
     [Key]
     public long amd_account_id { get; set; }
 
+    [Key]
+    [StringLength(50)]
+    public string amd_track_data { get; set; } = null!;
+
     [Column(TypeName = "money")]
     public decimal amd_split_a { get; set; }
 
     [Column(TypeName = "money")]
     public decimal amd_prize { get; set; }
-
-    [Key]
-    [StringLength(50)]
-    public string amd_track_data { get; set; } = null!;
 }

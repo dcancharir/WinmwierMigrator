@@ -37,8 +37,4 @@ public partial class money_meter
     public DateTime mm_last_reported { get; set; }
 
     public byte[]? mm_timestamp { get; set; }
-
-    [ForeignKey("mm_meter_id")]
-    [InverseProperty("money_meters")]
-    public virtual meter mm_meter { get; set; } = null!;
 }

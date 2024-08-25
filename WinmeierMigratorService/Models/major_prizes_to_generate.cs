@@ -11,8 +11,4 @@ public partial class major_prizes_to_generate
 {
     [Key]
     public long mpg_operation_id { get; set; }
-
-    [ForeignKey("mpg_operation_id")]
-    [InverseProperty("major_prizes_to_generate")]
-    public virtual account_major_prize mpg_operation { get; set; } = null!;
 }

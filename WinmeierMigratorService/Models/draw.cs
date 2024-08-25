@@ -50,10 +50,10 @@ public partial class draw
 
     public string? dr_detail3 { get; set; }
 
-    [Column(TypeName = "numeric(6, 2)")]
+    [Column(TypeName = "numeric(18, 0)")]
     public decimal? dr_min_played_pct { get; set; }
 
-    [Column(TypeName = "numeric(5, 2)")]
+    [Column(TypeName = "numeric(18, 0)")]
     public decimal? dr_min_spent_pct { get; set; }
 
     [Column(TypeName = "money")]

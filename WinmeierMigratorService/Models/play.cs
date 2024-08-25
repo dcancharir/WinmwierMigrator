@@ -41,8 +41,4 @@ public partial class play
     public decimal pl_final_balance { get; set; }
 
     public bool? pl_transferred { get; set; }
-
-    [ForeignKey("pl_terminal_id")]
-    [InverseProperty("plays")]
-    public virtual terminal pl_terminal { get; set; } = null!;
 }

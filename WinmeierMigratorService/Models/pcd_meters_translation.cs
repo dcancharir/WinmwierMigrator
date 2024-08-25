@@ -13,13 +13,13 @@ public partial class pcd_meters_translation
     [Key]
     public long pmt_configuration_id { get; set; }
 
-    public int pmt_pcd_io_number { get; set; }
-
     [Key]
     public int pmt_pcd_io_type { get; set; }
 
     [Key]
     public long pmt_egm_number { get; set; }
+
+    public int pmt_pcd_io_number { get; set; }
 
     [Column(TypeName = "money")]
     public decimal? pmt_egm_number_multiplier { get; set; }

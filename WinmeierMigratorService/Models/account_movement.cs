@@ -67,12 +67,4 @@ public partial class account_movement
     public string? am_track_data { get; set; }
 
     public int? am_modified_bucket_reason { get; set; }
-
-    [ForeignKey("am_account_id")]
-    [InverseProperty("account_movements")]
-    public virtual account am_account { get; set; } = null!;
-
-    [ForeignKey("am_play_session_id")]
-    [InverseProperty("account_movements")]
-    public virtual play_session? am_play_session { get; set; }
 }

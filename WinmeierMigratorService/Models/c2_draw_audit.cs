@@ -21,7 +21,4 @@ public partial class c2_draw_audit
 
     [Column(TypeName = "xml")]
     public string da_winning_numbers { get; set; } = null!;
-
-    [InverseProperty("dap_draw")]
-    public virtual ICollection<c2_draw_audit_play> c2_draw_audit_plays { get; set; } = new List<c2_draw_audit_play>();
 }

@@ -34,11 +34,4 @@ public partial class meter
     public DateTime me_last_reported { get; set; }
 
     public byte[]? me_timestamp { get; set; }
-
-    [ForeignKey("me_terminal_id")]
-    [InverseProperty("meters")]
-    public virtual terminal me_terminal { get; set; } = null!;
-
-    [InverseProperty("mm_meter")]
-    public virtual ICollection<money_meter> money_meters { get; set; } = new List<money_meter>();
 }

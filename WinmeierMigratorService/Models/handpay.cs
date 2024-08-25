@@ -15,6 +15,9 @@ namespace WinmeierMigratorService.Models;
 [Index("hp_type", "hp_movement_id", "hp_datetime", Name = "IX_hp_type_mov_date")]
 public partial class handpay
 {
+    [Key]
+    public long hp_id { get; set; }
+
     public int? hp_terminal_id { get; set; }
 
     [StringLength(50)]
@@ -64,9 +67,6 @@ public partial class handpay
 
     [Column(TypeName = "xml")]
     public string? hp_long_poll_1b_data { get; set; }
-
-    [Key]
-    public long hp_id { get; set; }
 
     public long? hp_progressive_id { get; set; }
 

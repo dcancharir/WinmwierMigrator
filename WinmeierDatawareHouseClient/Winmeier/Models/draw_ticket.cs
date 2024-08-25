@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WinmeierDataWarehouseClient.Winmeier.Models;
 
-[Keyless]
+//[Keyless]
 [Index("dt_draw_id", "dt_account_id", "dt_created", Name = "IX_draw_id")]
 [Index("dt_account_id", "dt_created", Name = "IX_draw_ticket_account_created")]
 [Index("dt_created", Name = "IX_draw_ticket_created")]
@@ -16,6 +16,7 @@ namespace WinmeierDataWarehouseClient.Winmeier.Models;
 [Index("dt_last_number", Name = "IX_last_number")]
 public partial class draw_ticket
 {
+    [Key]
     public long dt_id { get; set; }
 
     [Column(TypeName = "datetime")]

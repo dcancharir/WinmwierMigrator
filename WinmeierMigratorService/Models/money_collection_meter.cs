@@ -8,10 +8,10 @@ namespace WinmeierMigratorService.Models;
 
 public partial class money_collection_meter
 {
-    public long mcm_money_collection_id { get; set; }
-
     [Key]
     public long mcm_session_id { get; set; }
+
+    public long mcm_money_collection_id { get; set; }
 
     public long? mcm_bills_in_stacker_num { get; set; }
 

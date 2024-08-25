@@ -61,8 +61,4 @@ public partial class cashier_voucher
     public decimal? cv_m01_final { get; set; }
 
     public long? cv_m01_cancelled_sequence { get; set; }
-
-    [ForeignKey("cv_session_id")]
-    [InverseProperty("cashier_vouchers")]
-    public virtual cashier_session? cv_session { get; set; }
 }

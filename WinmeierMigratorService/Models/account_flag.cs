@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WinmeierMigratorService.Models;
 
+[Index("af_account_id", Name = "IX_account_flags_af_account_id")]
 [Index("af_flag_id", "af_status", Name = "IX_af_flag_status")]
 [Index("af_status", "af_account_id", "af_flag_id", Name = "IX_af_status_account")]
 public partial class account_flag
@@ -36,12 +37,4 @@ public partial class account_flag
     public DateTime? af_cancelled_datetime { get; set; }
 
     public int? af_cancelled_user_id { get; set; }
-
-    [ForeignKey("af_account_id")]
-    [InverseProperty("account_flags")]
-    public virtual account af_account { get; set; } = null!;
-
-    [ForeignKey("af_flag_id")]
-    [InverseProperty("account_flags")]
-    public virtual flag af_flag { get; set; } = null!;
 }

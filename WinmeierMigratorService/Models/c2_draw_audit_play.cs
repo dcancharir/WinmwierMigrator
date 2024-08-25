@@ -45,11 +45,4 @@ public partial class c2_draw_audit_play
     public string dap_cards { get; set; } = null!;
 
     public long dap_wcp_transaction_id { get; set; }
-
-    [InverseProperty("c2jh_play")]
-    public virtual ICollection<c2_jackpot_history> c2_jackpot_histories { get; set; } = new List<c2_jackpot_history>();
-
-    [ForeignKey("dap_draw_id")]
-    [InverseProperty("c2_draw_audit_plays")]
-    public virtual c2_draw_audit dap_draw { get; set; } = null!;
 }

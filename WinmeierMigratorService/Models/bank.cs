@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WinmeierMigratorService.Models;
 
+[Index("bk_area_id", Name = "IX_banks_bk_area_id")]
 [Index("bk_name", Name = "IX_bk_name", IsUnique = true)]
 public partial class bank
 {
@@ -18,11 +19,4 @@ public partial class bank
     public string bk_name { get; set; } = null!;
 
     public byte[]? bk_timestamp { get; set; }
-
-    [ForeignKey("bk_area_id")]
-    [InverseProperty("banks")]
-    public virtual area bk_area { get; set; } = null!;
-
-    [InverseProperty("te_bank")]
-    public virtual ICollection<terminal> terminals { get; set; } = new List<terminal>();
 }

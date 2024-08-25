@@ -28,7 +28,4 @@ public partial class group
     public string? gr_description { get; set; }
 
     public bool gr_enabled { get; set; }
-
-    [InverseProperty("ge_group")]
-    public virtual ICollection<group_element> group_elements { get; set; } = new List<group_element>();
 }

@@ -13,7 +13,6 @@ namespace WinmeierMigratorService.Models;
 [Index("ac_holder_is_vip", Name = "IX_ac_holder_is_vip")]
 [Index("ac_holder_level_expiration", Name = "IX_ac_holder_level_expiration")]
 [Index("ac_last_activity", Name = "IX_ac_last_activity")]
-[Index("ac_track_data", Name = "IX_track_data", IsUnique = true)]
 public partial class account
 {
     [Key]
@@ -465,19 +464,4 @@ public partial class account
 
     [Column(TypeName = "datetime")]
     public DateTime ac_last_update_in_utc_time { get; set; }
-
-    [InverseProperty("af_account")]
-    public virtual ICollection<account_flag> account_flags { get; set; } = new List<account_flag>();
-
-    [InverseProperty("amp_account")]
-    public virtual ICollection<account_major_prize> account_major_prizes { get; set; } = new List<account_major_prize>();
-
-    [InverseProperty("am_account")]
-    public virtual ICollection<account_movement> account_movements { get; set; } = new List<account_movement>();
-
-    [InverseProperty("apo_account")]
-    public virtual ICollection<account_payment_order> account_payment_orders { get; set; } = new List<account_payment_order>();
-
-    [InverseProperty("rtt_account")]
-    public virtual ICollection<reserved_terminal_transaction> reserved_terminal_transactions { get; set; } = new List<reserved_terminal_transaction>();
 }

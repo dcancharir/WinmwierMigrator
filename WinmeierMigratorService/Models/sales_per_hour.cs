@@ -6,10 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WinmeierMigratorService.Models;
 
-[Keyless]
+//[Keyless]
 [Table("sales_per_hour")]
 [Index("sph_base_hour", Name = "IX_sph_base_hour")]
-[Index("sph_timestamp", Name = "IX_sph_timestamp", IsUnique = true)]
 [Index("sph_unique_id", Name = "IX_sph_unique_id")]
 [Index("sph_base_hour", "sph_terminal_id", "sph_game_id", Name = "PK_sales_per_hour", IsUnique = true)]
 public partial class sales_per_hour
@@ -45,7 +44,7 @@ public partial class sales_per_hour
 
     [Column(TypeName = "money")]
     public decimal sph_theoretical_won_amount { get; set; }
-
+    [Key]
     public long sph_unique_id { get; set; }
 
     [Column(TypeName = "money")]

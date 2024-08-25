@@ -21,10 +21,4 @@ public partial class cj_queue
     public string? cq_path { get; set; }
 
     public int cq_sequence_number { get; set; }
-
-    [InverseProperty("ctx_queue")]
-    public virtual ICollection<cj_transaction> cj_transactions { get; set; } = new List<cj_transaction>();
-
-    [InverseProperty("wscq_queue")]
-    public virtual ICollection<wcp_services_to_cj_queue> wcp_services_to_cj_queues { get; set; } = new List<wcp_services_to_cj_queue>();
 }

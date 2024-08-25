@@ -21,8 +21,4 @@ public partial class currency_denomination
     public decimal cud_denomination { get; set; }
 
     public bool cud_rejected { get; set; }
-
-    [ForeignKey("cud_iso_code")]
-    [InverseProperty("currency_denominations")]
-    public virtual currency cud_iso_codeNavigation { get; set; } = null!;
 }

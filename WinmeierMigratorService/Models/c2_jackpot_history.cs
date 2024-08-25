@@ -37,8 +37,4 @@ public partial class c2_jackpot_history
 
     [StringLength(50)]
     public string? c2jh_game_name { get; set; }
-
-    [ForeignKey("c2jh_play_id")]
-    [InverseProperty("c2_jackpot_histories")]
-    public virtual c2_draw_audit_play? c2jh_play { get; set; }
 }

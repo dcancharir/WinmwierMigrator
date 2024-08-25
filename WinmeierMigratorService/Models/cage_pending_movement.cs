@@ -14,8 +14,4 @@ public partial class cage_pending_movement
     public int cpm_user_id { get; set; }
 
     public int? cpm_type { get; set; }
-
-    [ForeignKey("cpm_movement_id")]
-    [InverseProperty("cage_pending_movement")]
-    public virtual cage_movement cpm_movement { get; set; } = null!;
 }

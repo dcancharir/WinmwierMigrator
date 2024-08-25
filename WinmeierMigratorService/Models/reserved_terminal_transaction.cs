@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 namespace WinmeierMigratorService.Models;
 
 [Table("reserved_terminal_transaction")]
+[Index("rtt_account_id", Name = "IX_reserved_terminal_transaction_rtt_account_id")]
+[Index("rtt_terminal_id", Name = "IX_reserved_terminal_transaction_rtt_terminal_id")]
 public partial class reserved_terminal_transaction
 {
     [Key]
@@ -33,12 +35,4 @@ public partial class reserved_terminal_transaction
     public int? rtt_total_minutes { get; set; }
 
     public int rtt_status { get; set; }
-
-    [ForeignKey("rtt_account_id")]
-    [InverseProperty("reserved_terminal_transactions")]
-    public virtual account rtt_account { get; set; } = null!;
-
-    [ForeignKey("rtt_terminal_id")]
-    [InverseProperty("reserved_terminal_transactions")]
-    public virtual terminal rtt_terminal { get; set; } = null!;
 }

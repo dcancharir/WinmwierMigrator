@@ -17,9 +17,6 @@ public partial class wsp_player_recharge
     [Column(TypeName = "money")]
     public decimal wpr_nr_amount { get; set; }
 
-    /// <summary>
-    /// 1 - Pending; 2 - In Progress; 3 - Error; 4 - Ok; 5 - Timeout
-    /// </summary>
     public int wpr_status { get; set; }
 
     [Column(TypeName = "datetime")]

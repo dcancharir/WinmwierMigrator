@@ -18,13 +18,13 @@ public partial class aml_monthly
     [Key]
     public long amm_account_id { get; set; }
 
+    [Key]
+    [StringLength(50)]
+    public string amm_track_data { get; set; } = null!;
+
     [Column(TypeName = "money")]
     public decimal amm_split_a { get; set; }
 
     [Column(TypeName = "money")]
     public decimal amm_prize { get; set; }
-
-    [Key]
-    [StringLength(50)]
-    public string amm_track_data { get; set; } = null!;
 }

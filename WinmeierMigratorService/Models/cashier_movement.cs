@@ -77,12 +77,4 @@ public partial class cashier_movement
     public int? cm_chips_sale_denomination { get; set; }
 
     public long? cm_related_id { get; set; }
-
-    [ForeignKey("cm_session_id")]
-    [InverseProperty("cashier_movements")]
-    public virtual cashier_session cm_session { get; set; } = null!;
-
-    [ForeignKey("cm_movement_id")]
-    [InverseProperty("cm_movements")]
-    public virtual ICollection<cage_movement> cgm_movements { get; set; } = new List<cage_movement>();
 }

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WinmeierMigratorService.Models;
 
+[Index("amp_account_id", Name = "IX_account_major_prizes_amp_account_id")]
 public partial class account_major_prize
 {
     [Key]
@@ -106,15 +107,4 @@ public partial class account_major_prize
     public DateTime? amp_player_birth_date { get; set; }
 
     public bool? amp_generated_document { get; set; }
-
-    [ForeignKey("amp_account_id")]
-    [InverseProperty("account_major_prizes")]
-    public virtual account amp_account { get; set; } = null!;
-
-    [ForeignKey("amp_operation_id")]
-    [InverseProperty("account_major_prize")]
-    public virtual account_operation amp_operation { get; set; } = null!;
-
-    [InverseProperty("mpg_operation")]
-    public virtual major_prizes_to_generate? major_prizes_to_generate { get; set; }
 }

@@ -22,8 +22,4 @@ public partial class hpc_meter
 
     [Column(TypeName = "money")]
     public decimal? hpc_max_handpays_amount { get; set; }
-
-    [ForeignKey("hpc_terminal_id")]
-    [InverseProperty("hpc_meter")]
-    public virtual terminal hpc_terminal { get; set; } = null!;
 }

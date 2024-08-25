@@ -13,9 +13,9 @@ public partial class game_type
     [Key]
     public int gt_game_type { get; set; }
 
-    [StringLength(50)]
-    public string gt_name { get; set; } = null!;
-
     [Key]
     public int gt_language_id { get; set; }
+
+    [StringLength(50)]
+    public string gt_name { get; set; } = null!;
 }

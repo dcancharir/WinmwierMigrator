@@ -9,6 +9,7 @@ namespace WinmeierMigratorService.Models;
 [Index("cmd_ps_id", Name = "IX_ps_cmd")]
 [Index("cmd_status", Name = "IX_status")]
 [Index("cmd_status", "cmd_terminal_id", "cmd_code", Name = "IX_status_terminal_cmd")]
+[Index("cmd_created", Name = "IX_wcp_cmd_created")]
 public partial class wcp_command
 {
     [Key]

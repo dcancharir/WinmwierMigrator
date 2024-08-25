@@ -16,12 +16,12 @@ public partial class money_collection_detail
     [Column(TypeName = "money")]
     public decimal mcd_face_value { get; set; }
 
+    [Key]
+    public int mcd_cage_currency_type { get; set; }
+
     [Column(TypeName = "money")]
     public decimal mcd_num_expected { get; set; }
 
     [Column(TypeName = "money")]
     public decimal mcd_num_collected { get; set; }
-
-    [Key]
-    public int mcd_cage_currency_type { get; set; }
 }

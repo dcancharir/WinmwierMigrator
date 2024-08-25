@@ -18,9 +18,9 @@ public partial class cage_stock
     [Column(TypeName = "money")]
     public decimal cgs_denomination { get; set; }
 
-    [Column(TypeName = "money")]
-    public decimal cgs_quantity { get; set; }
-
     [Key]
     public int cgs_cage_currency_type { get; set; }
+
+    [Column(TypeName = "money")]
+    public decimal cgs_quantity { get; set; }
 }

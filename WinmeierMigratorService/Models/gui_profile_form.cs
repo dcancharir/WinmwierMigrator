@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace WinmeierMigratorService.Models;
 
 [PrimaryKey("gpf_profile_id", "gpf_gui_id", "gpf_form_id")]
+[Index("gpf_gui_id", "gpf_form_id", Name = "IX_gui_profile_forms_gpf_gui_id_gpf_form_id")]
 public partial class gui_profile_form
 {
     [Key]
@@ -25,12 +26,4 @@ public partial class gui_profile_form
     public bool gpf_delete_perm { get; set; }
 
     public bool gpf_execute_perm { get; set; }
-
-    [ForeignKey("gpf_profile_id")]
-    [InverseProperty("gui_profile_forms")]
-    public virtual gui_user_profile gpf_profile { get; set; } = null!;
-
-    [ForeignKey("gpf_gui_id, gpf_form_id")]
-    [InverseProperty("gui_profile_forms")]
-    public virtual gui_form gui_form { get; set; } = null!;
 }

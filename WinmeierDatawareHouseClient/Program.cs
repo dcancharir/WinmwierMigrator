@@ -4,6 +4,10 @@ using WinmeierDatawareHouseClient.Keops.Context;
 using WinmeierDatawareHouseClient.Winmeier.Context;
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.Configure<IISServerOptions>(options =>
+{
+	options.MaxRequestBodySize = 2147483648;
+});
 // Add services to the container.
 
 builder.Services.AddControllers();

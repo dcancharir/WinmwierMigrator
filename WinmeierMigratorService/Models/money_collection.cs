@@ -8,6 +8,7 @@ namespace WinmeierMigratorService.Models;
 
 [Index("mc_cashier_session_id", Name = "IX_mc_cashier_session_id")]
 [Index("mc_cashier_session_id", "mc_terminal_id", Name = "IX_mc_cashier_session_terminal_id")]
+[Index("mc_collection_datetime", Name = "IX_mc_collection_datetime")]
 [Index("mc_datetime", Name = "IX_mc_datetime")]
 [Index("mc_terminal_id", Name = "IX_mc_terminal_id")]
 [Index("mc_terminal_id", "mc_stacker_id", "mc_wcp_transaction_id", Name = "IX_mc_terminal_stacker_transaction")]

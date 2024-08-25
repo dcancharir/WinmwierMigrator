@@ -18,7 +18,7 @@ public partial class progressife
     [Column(TypeName = "datetime")]
     public DateTime pgs_created { get; set; }
 
-    [Column(TypeName = "numeric(7, 4)")]
+    [Column(TypeName = "numeric(18, 0)")]
     public decimal pgs_contribution_pct { get; set; }
 
     public int pgs_num_levels { get; set; }

@@ -18,7 +18,4 @@ public partial class gds_group_element
     public bool gge_is_group { get; set; }
 
     public long gge_element_id { get; set; }
-
-    [ForeignKey("gge_group_id")]
-    public virtual gds_group gge_group { get; set; } = null!;
 }

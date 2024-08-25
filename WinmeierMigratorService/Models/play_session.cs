@@ -14,7 +14,6 @@ namespace WinmeierMigratorService.Models;
 [Index("ps_started", "ps_terminal_id", Name = "IX_ps_started_terminal_id")]
 [Index("ps_status", "ps_terminal_id", Name = "IX_ps_status")]
 [Index("ps_terminal_id", "ps_status", "ps_stand_alone", Name = "IX_ps_terminal_id")]
-[Index("ps_timestamp", Name = "IX_ps_timestamp", IsUnique = true)]
 public partial class play_session
 {
     [Key]
@@ -200,11 +199,4 @@ public partial class play_session
 
     [Column(TypeName = "money")]
     public decimal? ps_total_cash_out { get; set; }
-
-    [InverseProperty("am_play_session")]
-    public virtual ICollection<account_movement> account_movements { get; set; } = new List<account_movement>();
-
-    [ForeignKey("ps_terminal_id")]
-    [InverseProperty("play_sessions")]
-    public virtual terminal ps_terminal { get; set; } = null!;
 }

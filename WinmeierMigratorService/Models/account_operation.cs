@@ -66,10 +66,4 @@ public partial class account_operation
 
     [StringLength(255)]
     public string? ao_comment_handpay { get; set; }
-
-    [InverseProperty("amp_operation")]
-    public virtual account_major_prize? account_major_prize { get; set; }
-
-    [InverseProperty("apo_operation")]
-    public virtual account_payment_order? account_payment_order { get; set; }
 }

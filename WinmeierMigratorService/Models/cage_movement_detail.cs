@@ -25,8 +25,4 @@ public partial class cage_movement_detail
     public long? cmd_chip_id { get; set; }
 
     public int? cmd_cage_currency_type { get; set; }
-
-    [ForeignKey("cmd_movement_id")]
-    [InverseProperty("cage_movement_details")]
-    public virtual cage_movement cmd_movement { get; set; } = null!;
 }

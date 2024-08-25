@@ -15,13 +15,13 @@ public partial class tickets_audit_status_change
     [Key]
     public long tia_id { get; set; }
 
+    [Key]
+    public long tia_validation_number { get; set; }
+
     [Column(TypeName = "datetime")]
     public DateTime tia_insert_date { get; set; }
 
     public long tia_ticket_id { get; set; }
-
-    [Key]
-    public long tia_validation_number { get; set; }
 
     [Column(TypeName = "money")]
     public decimal? tia_amount { get; set; }

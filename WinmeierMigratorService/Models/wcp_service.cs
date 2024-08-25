@@ -16,7 +16,4 @@ public partial class wcp_service
 
     [Column(TypeName = "datetime")]
     public DateTime? wsvr_watchdog { get; set; }
-
-    [InverseProperty("wscq_service")]
-    public virtual wcp_services_to_cj_queue? wcp_services_to_cj_queue { get; set; }
 }

@@ -17,10 +17,10 @@ public partial class cage_currency
     [Column(TypeName = "money")]
     public decimal cgc_denomination { get; set; }
 
-    public bool cgc_allowed { get; set; }
-
     [Key]
     public int cgc_cage_currency_type { get; set; }
+
+    public bool cgc_allowed { get; set; }
 
     public bool? cgc_cage_visible { get; set; }
 }

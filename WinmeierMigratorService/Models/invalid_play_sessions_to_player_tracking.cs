@@ -6,10 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WinmeierMigratorService.Models;
 
-[Keyless]
+//[Keyless]
 [Table("invalid_play_sessions_to_player_tracking")]
 public partial class invalid_play_sessions_to_player_tracking
 {
+    [Key]
     public long ips_unique_ud { get; set; }
 
     public long ips_play_session_id { get; set; }

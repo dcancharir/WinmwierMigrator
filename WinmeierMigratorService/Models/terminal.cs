@@ -7,9 +7,8 @@ using Microsoft.EntityFrameworkCore;
 namespace WinmeierMigratorService.Models;
 
 [Index("te_external_id", Name = "IX_terminal_external_id")]
-[Index("te_name", Name = "IX_terminal_name", IsUnique = true)]
-[Index("te_terminal_id", "te_provider_id", Name = "IX_terminal_provider_id", IsUnique = true)]
-[Index("te_unique_external_id", Name = "IX_terminal_unique_ext_id", IsUnique = true)]
+[Index("te_bank_id", Name = "IX_terminals_te_bank_id")]
+[Index("te_server_id", Name = "IX_terminals_te_server_id")]
 public partial class terminal
 {
     [Key]
@@ -251,57 +250,4 @@ public partial class terminal
     public int? te_manufacture_month { get; set; }
 
     public int? te_manufacture_day { get; set; }
-
-    [InverseProperty("te_server")]
-    public virtual ICollection<terminal> Inversete_server { get; set; } = new List<terminal>();
-
-    [InverseProperty("ctx_terminal")]
-    public virtual ICollection<cj_transaction> cj_transactions { get; set; } = new List<cj_transaction>();
-
-    [InverseProperty("eh_terminal")]
-    public virtual ICollection<event_history> event_histories { get; set; } = new List<event_history>();
-
-    [InverseProperty("gm_terminal")]
-    public virtual ICollection<game_meter> game_meters { get; set; } = new List<game_meter>();
-
-    [InverseProperty("hpc_terminal")]
-    public virtual hpc_meter? hpc_meter { get; set; }
-
-    [InverseProperty("me_terminal")]
-    public virtual ICollection<meter> meters { get; set; } = new List<meter>();
-
-    [InverseProperty("ps_terminal")]
-    public virtual ICollection<play_session> play_sessions { get; set; } = new List<play_session>();
-
-    [InverseProperty("pl_terminal")]
-    public virtual ICollection<play> plays { get; set; } = new List<play>();
-
-    [InverseProperty("rtt_terminal")]
-    public virtual ICollection<reserved_terminal_transaction> reserved_terminal_transactions { get; set; } = new List<reserved_terminal_transaction>();
-
-    [ForeignKey("te_bank_id")]
-    [InverseProperty("terminals")]
-    public virtual bank te_bank { get; set; } = null!;
-
-    [ForeignKey("te_server_id")]
-    [InverseProperty("Inversete_server")]
-    public virtual terminal? te_server { get; set; }
-
-    [InverseProperty("w2m_terminal")]
-    public virtual ICollection<wc2_message> wc2_messages { get; set; } = new List<wc2_message>();
-
-    [InverseProperty("w2s_terminal")]
-    public virtual ICollection<wc2_session> wc2_sessions { get; set; } = new List<wc2_session>();
-
-    [InverseProperty("w2tx_terminal")]
-    public virtual ICollection<wc2_transaction> wc2_transactions { get; set; } = new List<wc2_transaction>();
-
-    [InverseProperty("wm_terminal")]
-    public virtual ICollection<wcp_message> wcp_messages { get; set; } = new List<wcp_message>();
-
-    [InverseProperty("ws_terminal")]
-    public virtual ICollection<wcp_session> wcp_sessions { get; set; } = new List<wcp_session>();
-
-    [InverseProperty("wtx_terminal")]
-    public virtual ICollection<wcp_transaction> wcp_transactions { get; set; } = new List<wcp_transaction>();
 }

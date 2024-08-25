@@ -7,6 +7,9 @@ using Microsoft.EntityFrameworkCore;
 namespace WinmeierMigratorService.Models;
 
 [Table("mapp_section_schema")]
+[Index("ss_background_image_id", Name = "IX_mapp_section_schema_ss_background_image_id")]
+[Index("ss_icon_image_id", Name = "IX_mapp_section_schema_ss_icon_image_id")]
+[Index("ss_parent_id", Name = "IX_mapp_section_schema_ss_parent_id")]
 public partial class mapp_section_schema
 {
     [Key]
@@ -39,19 +42,4 @@ public partial class mapp_section_schema
     public long? ss_footer_image_id { get; set; }
 
     public int? ss_footer_order { get; set; }
-
-    [InverseProperty("ss_parent")]
-    public virtual ICollection<mapp_section_schema> Inversess_parent { get; set; } = new List<mapp_section_schema>();
-
-    [ForeignKey("ss_background_image_id")]
-    [InverseProperty("mapp_section_schemass_background_images")]
-    public virtual mapp_image? ss_background_image { get; set; }
-
-    [ForeignKey("ss_icon_image_id")]
-    [InverseProperty("mapp_section_schemass_icon_images")]
-    public virtual mapp_image? ss_icon_image { get; set; }
-
-    [ForeignKey("ss_parent_id")]
-    [InverseProperty("Inversess_parent")]
-    public virtual mapp_section_schema? ss_parent { get; set; }
 }

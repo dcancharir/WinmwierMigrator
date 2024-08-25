@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WinmeierMigratorService.Models;
 
+[Index("wm_session_id", Name = "IX_wcp_messages_wm_session_id")]
+[Index("wm_terminal_id", Name = "IX_wcp_messages_wm_terminal_id")]
 public partial class wcp_message
 {
     [Key]
@@ -24,12 +26,4 @@ public partial class wcp_message
 
     [Column(TypeName = "xml")]
     public string wm_message { get; set; } = null!;
-
-    [ForeignKey("wm_session_id")]
-    [InverseProperty("wcp_messages")]
-    public virtual wcp_session? wm_session { get; set; }
-
-    [ForeignKey("wm_terminal_id")]
-    [InverseProperty("wcp_messages")]
-    public virtual terminal? wm_terminal { get; set; }
 }

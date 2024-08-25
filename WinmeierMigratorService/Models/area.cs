@@ -19,10 +19,4 @@ public partial class area
     public bool ar_smoking { get; set; }
 
     public byte[]? ar_timestamp { get; set; }
-
-    [InverseProperty("bk_area")]
-    public virtual ICollection<bank> banks { get; set; } = new List<bank>();
-
-    [InverseProperty("gt_area")]
-    public virtual ICollection<gaming_table> gaming_tables { get; set; } = new List<gaming_table>();
 }

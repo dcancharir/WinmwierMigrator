@@ -37,14 +37,4 @@ public partial class wc2_session
 
     [StringLength(50)]
     public string? w2s_server_name { get; set; }
-
-    [ForeignKey("w2s_terminal_id")]
-    [InverseProperty("wc2_sessions")]
-    public virtual terminal w2s_terminal { get; set; } = null!;
-
-    [InverseProperty("w2m_session")]
-    public virtual ICollection<wc2_message> wc2_messages { get; set; } = new List<wc2_message>();
-
-    [InverseProperty("w2tx_session")]
-    public virtual ICollection<wc2_transaction> wc2_transactions { get; set; } = new List<wc2_transaction>();
 }

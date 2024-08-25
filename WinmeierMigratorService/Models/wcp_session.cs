@@ -37,17 +37,4 @@ public partial class wcp_session
 
     [StringLength(50)]
     public string? ws_server_name { get; set; }
-
-    [InverseProperty("ctx_session")]
-    public virtual ICollection<cj_transaction> cj_transactions { get; set; } = new List<cj_transaction>();
-
-    [InverseProperty("wm_session")]
-    public virtual ICollection<wcp_message> wcp_messages { get; set; } = new List<wcp_message>();
-
-    [InverseProperty("wtx_session")]
-    public virtual ICollection<wcp_transaction> wcp_transactions { get; set; } = new List<wcp_transaction>();
-
-    [ForeignKey("ws_terminal_id")]
-    [InverseProperty("wcp_sessions")]
-    public virtual terminal ws_terminal { get; set; } = null!;
 }

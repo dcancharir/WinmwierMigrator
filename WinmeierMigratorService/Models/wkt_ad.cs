@@ -34,7 +34,4 @@ public partial class wkt_ad
     public int? ad_time_from2 { get; set; }
 
     public int? ad_time_to2 { get; set; }
-
-    [InverseProperty("as_ad")]
-    public virtual ICollection<wkt_ad_step> wkt_ad_steps { get; set; } = new List<wkt_ad_step>();
 }

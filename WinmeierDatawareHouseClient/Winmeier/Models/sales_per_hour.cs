@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WinmeierDataWarehouseClient.Winmeier.Models;
 
-[Keyless]
+//[Keyless]
 [Table("sales_per_hour")]
 [Index("sph_base_hour", Name = "IX_sph_base_hour")]
 [Index("sph_unique_id", Name = "IX_sph_unique_id")]
@@ -44,7 +44,7 @@ public partial class sales_per_hour
 
     [Column(TypeName = "money")]
     public decimal sph_theoretical_won_amount { get; set; }
-
+    [Key]
     public long sph_unique_id { get; set; }
 
     [Column(TypeName = "money")]

@@ -70,10 +70,4 @@ public partial class cashier_session
     public bool cs_short_over_history { get; set; }
 
     public long? cs_has_pinpad_operations { get; set; }
-
-    [InverseProperty("cm_session")]
-    public virtual ICollection<cashier_movement> cashier_movements { get; set; } = new List<cashier_movement>();
-
-    [InverseProperty("cv_session")]
-    public virtual ICollection<cashier_voucher> cashier_vouchers { get; set; } = new List<cashier_voucher>();
 }

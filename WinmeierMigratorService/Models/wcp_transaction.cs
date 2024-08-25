@@ -8,6 +8,7 @@ namespace WinmeierMigratorService.Models;
 
 [PrimaryKey("wtx_terminal_id", "wtx_sequence_id", "wtx_requested_by_terminal")]
 [Index("wtx_terminal_id", Name = "IX_wcp_transactions")]
+[Index("wtx_session_id", Name = "IX_wcp_transactions_wtx_session_id")]
 public partial class wcp_transaction
 {
     [Key]
@@ -29,12 +30,4 @@ public partial class wcp_transaction
     public long? wtx_request_msg_id { get; set; }
 
     public long? wtx_response_msg_id { get; set; }
-
-    [ForeignKey("wtx_session_id")]
-    [InverseProperty("wcp_transactions")]
-    public virtual wcp_session wtx_session { get; set; } = null!;
-
-    [ForeignKey("wtx_terminal_id")]
-    [InverseProperty("wcp_transactions")]
-    public virtual terminal wtx_terminal { get; set; } = null!;
 }

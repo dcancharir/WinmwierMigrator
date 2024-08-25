@@ -17,17 +17,11 @@ public partial class mailing_instance
     [Column(TypeName = "datetime")]
     public DateTime mi_prog_date { get; set; }
 
-    /// <summary>
-    /// Time in minutes (0..1439)
-    /// </summary>
     public long mi_prog_data { get; set; }
 
     [StringLength(50)]
     public string mi_name { get; set; } = null!;
 
-    /// <summary>
-    /// 1: Statistics
-    /// </summary>
     public int mi_type { get; set; }
 
     [Column(TypeName = "datetime")]
@@ -41,9 +35,6 @@ public partial class mailing_instance
 
     public string mi_message { get; set; } = null!;
 
-    /// <summary>
-    /// 0: Pending; 1: Running; 2: Successful; 3: Failed
-    /// </summary>
     public int mi_status { get; set; }
 
     [StringLength(500)]

@@ -18,7 +18,4 @@ public partial class gui_form
     public int gf_form_order { get; set; }
 
     public int gf_nls_id { get; set; }
-
-    [InverseProperty("gui_form")]
-    public virtual ICollection<gui_profile_form> gui_profile_forms { get; set; } = new List<gui_profile_form>();
 }

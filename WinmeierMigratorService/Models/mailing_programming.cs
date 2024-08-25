@@ -17,9 +17,6 @@ public partial class mailing_programming
 
     public bool mp_enabled { get; set; }
 
-    /// <summary>
-    /// 1: Statistics
-    /// </summary>
     public int mp_type { get; set; }
 
     [StringLength(500)]
@@ -30,14 +27,8 @@ public partial class mailing_programming
 
     public int mp_schedule_weekday { get; set; }
 
-    /// <summary>
-    /// Time in minutes (0..1439)
-    /// </summary>
     public int mp_schedule_time_from { get; set; }
 
-    /// <summary>
-    /// Time in minutes (0..1439)
-    /// </summary>
     public int mp_schedule_time_to { get; set; }
 
     public int mp_schedule_time_step { get; set; }

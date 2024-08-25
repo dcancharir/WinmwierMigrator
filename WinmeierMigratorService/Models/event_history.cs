@@ -8,23 +8,24 @@ namespace WinmeierMigratorService.Models;
 
 [PrimaryKey("eh_datetime", "eh_terminal_id", "eh_event_id")]
 [Table("event_history")]
+[Index("eh_terminal_id", Name = "IX_event_history_eh_terminal_id")]
 [Index("eh_timestamp", Name = "IX_event_timestamp")]
 public partial class event_history
 {
     [Key]
     public long eh_event_id { get; set; }
 
-    [Column(TypeName = "datetime")]
-    public DateTime eh_reported { get; set; }
-
     [Key]
     public int eh_terminal_id { get; set; }
-
-    public int? eh_session_id { get; set; }
 
     [Key]
     [Column(TypeName = "datetime")]
     public DateTime eh_datetime { get; set; }
+
+    [Column(TypeName = "datetime")]
+    public DateTime eh_reported { get; set; }
+
+    public int? eh_session_id { get; set; }
 
     public int eh_event_type { get; set; }
 
@@ -49,8 +50,4 @@ public partial class event_history
 
     [Column(TypeName = "money")]
     public decimal? eh_operation_data { get; set; }
-
-    [ForeignKey("eh_terminal_id")]
-    [InverseProperty("event_histories")]
-    public virtual terminal eh_terminal { get; set; } = null!;
 }

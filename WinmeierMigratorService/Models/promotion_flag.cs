@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace WinmeierMigratorService.Models;
 
 [PrimaryKey("pf_promotion_id", "pf_type", "pf_flag_id")]
+[Index("pf_flag_id", Name = "IX_promotion_flags_pf_flag_id")]
 public partial class promotion_flag
 {
     [Key]
@@ -19,8 +20,4 @@ public partial class promotion_flag
     public long pf_flag_id { get; set; }
 
     public int pf_flag_count { get; set; }
-
-    [ForeignKey("pf_flag_id")]
-    [InverseProperty("promotion_flags")]
-    public virtual flag pf_flag { get; set; } = null!;
 }

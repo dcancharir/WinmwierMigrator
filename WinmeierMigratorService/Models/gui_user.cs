@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WinmeierMigratorService.Models;
 
+[Index("gu_profile_id", Name = "IX_gui_users_gu_profile_id")]
 [Index("gu_username", Name = "UNQ_gui_users", IsUnique = true)]
 public partial class gui_user
 {
@@ -97,11 +98,4 @@ public partial class gui_user
 
     [Column(TypeName = "xml")]
     public string? gu_cashier_last_login { get; set; }
-
-    [ForeignKey("gu_profile_id")]
-    [InverseProperty("gui_users")]
-    public virtual gui_user_profile gu_profile { get; set; } = null!;
-
-    [InverseProperty("ga_gui_user")]
-    public virtual ICollection<gui_audit> gui_audits { get; set; } = new List<gui_audit>();
 }

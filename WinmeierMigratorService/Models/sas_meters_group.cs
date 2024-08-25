@@ -18,8 +18,4 @@ public partial class sas_meters_group
     public string? smg_description { get; set; }
 
     public bool smg_required { get; set; }
-
-    [ForeignKey("smcg_group_id")]
-    [InverseProperty("smcg_groups")]
-    public virtual ICollection<sas_meters_catalog> smcg_meter_codes { get; set; } = new List<sas_meters_catalog>();
 }

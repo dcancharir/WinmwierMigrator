@@ -28,6 +28,9 @@ public partial class cashier_movements_grouped_by_session_id
     [Column(TypeName = "money")]
     public decimal CM_CURRENCY_DENOMINATION { get; set; }
 
+    [Key]
+    public int CM_CAGE_CURRENCY_TYPE { get; set; }
+
     public int CM_TYPE_COUNT { get; set; }
 
     [Column(TypeName = "money")]
@@ -44,7 +47,4 @@ public partial class cashier_movements_grouped_by_session_id
 
     [Column(TypeName = "money")]
     public decimal? CM_FINAL_BALANCE { get; set; }
-
-    [Key]
-    public int CM_CAGE_CURRENCY_TYPE { get; set; }
 }

@@ -18,7 +18,4 @@ public partial class gaming_tables_type
     public bool gtt_enabled { get; set; }
 
     public int? gtt_report_type_id { get; set; }
-
-    [InverseProperty("gt_type")]
-    public virtual ICollection<gaming_table> gaming_tables { get; set; } = new List<gaming_table>();
 }

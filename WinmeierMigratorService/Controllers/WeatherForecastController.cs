@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using WinmeierMigratorService.Context;
+using WinmeierMigratorService.Models;
 
 namespace WinmeierMigratorService.Controllers;
 [ApiController]
@@ -42,7 +43,20 @@ public class WeatherForecastController : ControllerBase
     [Route("get_account_documents/{quantity}")]
     public IActionResult get_account_documents(int quantity)
     {
-		var data = _context.account_documents.Take(quantity).ToArray();
-		return Ok(data);
-	}
+        var data = _context.account_documents.Take(quantity).ToArray();
+        return Ok(data);
+    }
+    //[HttpGet]
+    //[Route("getlist")]
+    //public IActionResult getlist(string entity,int quantity)
+    //{
+    //    // Obtén la DbSet correspondiente usando el nombre de la entidad
+    //    var dbSet = _context.GetDbSet(entity);
+    //    // Realiza consultas sobre la DbSet obtenida
+    //    var result = dbSet.OfType<object>()
+    //        .Take(quantity)
+    //        .ToList();
+
+    //    return Ok(result);
+    //}
 }

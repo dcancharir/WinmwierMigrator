@@ -10,6 +10,9 @@ namespace WinmeierMigratorService.Models;
 [Index("app_name", "app_machine", Name = "IX_app_name_machine", IsUnique = true)]
 public partial class application
 {
+    [Key]
+    public long app_id { get; set; }
+
     [StringLength(50)]
     public string app_name { get; set; } = null!;
 
@@ -33,7 +36,4 @@ public partial class application
 
     [StringLength(50)]
     public string? app_alias { get; set; }
-
-    [Key]
-    public long app_id { get; set; }
 }

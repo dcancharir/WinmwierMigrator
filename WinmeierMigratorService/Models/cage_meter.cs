@@ -19,6 +19,9 @@ public partial class cage_meter
     [StringLength(3)]
     public string cm_iso_code { get; set; } = null!;
 
+    [Key]
+    public int cm_cage_currency_type { get; set; }
+
     [Column(TypeName = "money")]
     public decimal cm_value { get; set; }
 
@@ -27,7 +30,4 @@ public partial class cage_meter
 
     [Column(TypeName = "money")]
     public decimal cm_value_out { get; set; }
-
-    [Key]
-    public int cm_cage_currency_type { get; set; }
 }

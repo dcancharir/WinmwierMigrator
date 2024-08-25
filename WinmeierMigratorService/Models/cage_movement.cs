@@ -52,14 +52,4 @@ public partial class cage_movement
     public DateTime? cgm_cancellation_datetime { get; set; }
 
     public long? cgm_related_id { get; set; }
-
-    [InverseProperty("cmd_movement")]
-    public virtual ICollection<cage_movement_detail> cage_movement_details { get; set; } = new List<cage_movement_detail>();
-
-    [InverseProperty("cpm_movement")]
-    public virtual cage_pending_movement? cage_pending_movement { get; set; }
-
-    [ForeignKey("cgm_movement_id")]
-    [InverseProperty("cgm_movements")]
-    public virtual ICollection<cashier_movement> cm_movements { get; set; } = new List<cashier_movement>();
 }

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WinmeierMigratorService.Models;
 
+[Index("ascr_resource_id", Name = "IX_wkt_ad_step_details_ascr_resource_id")]
 public partial class wkt_ad_step_detail
 {
     [Key]
@@ -32,12 +33,4 @@ public partial class wkt_ad_step_detail
     public int? ascr_text_font { get; set; }
 
     public int? ascr_text_alignment { get; set; }
-
-    [ForeignKey("ascr_resource_id")]
-    [InverseProperty("wkt_ad_step_details")]
-    public virtual wkt_resource? ascr_resource { get; set; }
-
-    [ForeignKey("ascr_step_id")]
-    [InverseProperty("wkt_ad_step_detail")]
-    public virtual wkt_ad_step ascr_step { get; set; } = null!;
 }

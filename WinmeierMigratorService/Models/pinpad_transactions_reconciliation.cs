@@ -14,10 +14,10 @@ public partial class pinpad_transactions_reconciliation
     [Column(TypeName = "datetime")]
     public DateTime ptc_drawal { get; set; }
 
-    public int ptc_user_id { get; set; }
-
     [Key]
     public long ptc_id { get; set; }
+
+    public int ptc_user_id { get; set; }
 
     public bool ptc_reconciliate { get; set; }
 

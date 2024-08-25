@@ -9,11 +9,15 @@ namespace WinmeierMigratorService.Models;
 [PrimaryKey("ga_audit_id", "ga_item_order")]
 [Table("gui_audit")]
 [Index("ga_datetime", Name = "IX_gui_audit_ga_datetime")]
+[Index("ga_gui_user_id", Name = "IX_gui_audit_ga_gui_user_id")]
 [Index("ga_related_type", "ga_related_id", Name = "IX_gui_related_type_related_id")]
 public partial class gui_audit
 {
     [Key]
     public long ga_audit_id { get; set; }
+
+    [Key]
+    public int ga_item_order { get; set; }
 
     public int ga_gui_id { get; set; }
 
@@ -31,9 +35,6 @@ public partial class gui_audit
     public int ga_audit_code { get; set; }
 
     public int ga_audit_level { get; set; }
-
-    [Key]
-    public int ga_item_order { get; set; }
 
     public int? ga_nls_id { get; set; }
 
@@ -55,8 +56,4 @@ public partial class gui_audit
     public int? ga_related_type { get; set; }
 
     public long? ga_related_id { get; set; }
-
-    [ForeignKey("ga_gui_user_id")]
-    [InverseProperty("gui_audits")]
-    public virtual gui_user? ga_gui_user { get; set; }
 }

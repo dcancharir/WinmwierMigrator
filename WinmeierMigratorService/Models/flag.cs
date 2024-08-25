@@ -33,10 +33,4 @@ public partial class flag
     public string? fl_description { get; set; }
 
     public int fl_color { get; set; }
-
-    [InverseProperty("af_flag")]
-    public virtual ICollection<account_flag> account_flags { get; set; } = new List<account_flag>();
-
-    [InverseProperty("pf_flag")]
-    public virtual ICollection<promotion_flag> promotion_flags { get; set; } = new List<promotion_flag>();
 }

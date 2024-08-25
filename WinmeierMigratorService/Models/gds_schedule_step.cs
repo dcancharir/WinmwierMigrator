@@ -21,7 +21,4 @@ public partial class gds_schedule_step
     public int gss_action_type { get; set; }
 
     public long? gss_action_data { get; set; }
-
-    [ForeignKey("gss_schedule_id")]
-    public virtual gds_schedule_time gss_schedule { get; set; } = null!;
 }

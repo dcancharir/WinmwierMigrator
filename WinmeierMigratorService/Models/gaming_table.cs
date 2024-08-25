@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WinmeierMigratorService.Models;
 
+[Index("gt_area_id", Name = "IX_gaming_tables_gt_area_id")]
+[Index("gt_cur_iso_code", Name = "IX_gaming_tables_gt_cur_iso_code")]
 [Index("gt_enabled", "gt_name", "gt_cashier_id", "gt_gaming_table_id", "gt_code", Name = "IX_gamning_tables_combos")]
 [Index("gt_cashier_id", Name = "IX_gt_cashier_id")]
 [Index("gt_name", Name = "IX_gt_name")]
@@ -91,16 +93,4 @@ public partial class gaming_table
     public decimal? gt_bet_max_curr_2 { get; set; }
 
     public bool gt_processing { get; set; }
-
-    [ForeignKey("gt_area_id")]
-    [InverseProperty("gaming_tables")]
-    public virtual area? gt_area { get; set; }
-
-    [ForeignKey("gt_cur_iso_code")]
-    [InverseProperty("gaming_tables")]
-    public virtual currency? gt_cur_iso_codeNavigation { get; set; }
-
-    [ForeignKey("gt_type_id")]
-    [InverseProperty("gaming_tables")]
-    public virtual gaming_tables_type gt_type { get; set; } = null!;
 }

@@ -22,10 +22,4 @@ public partial class currency
 
     [StringLength(3)]
     public string? cur_alias2 { get; set; }
-
-    [InverseProperty("cud_iso_codeNavigation")]
-    public virtual ICollection<currency_denomination> currency_denominations { get; set; } = new List<currency_denomination>();
-
-    [InverseProperty("gt_cur_iso_codeNavigation")]
-    public virtual ICollection<gaming_table> gaming_tables { get; set; } = new List<gaming_table>();
 }

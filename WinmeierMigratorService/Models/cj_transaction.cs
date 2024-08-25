@@ -8,6 +8,8 @@ namespace WinmeierMigratorService.Models;
 
 [PrimaryKey("ctx_sequence_number", "ctx_queue_id")]
 [Index("ctx_terminal_id", "ctx_transaction_id", "ctx_sequence_id", "ctx_session_id", Name = "IX_cj_transactions")]
+[Index("ctx_queue_id", Name = "IX_cj_transactions_ctx_queue_id")]
+[Index("ctx_session_id", Name = "IX_cj_transactions_ctx_session_id")]
 public partial class cj_transaction
 {
     [Key]
@@ -32,16 +34,4 @@ public partial class cj_transaction
     public long? ctx_request_msg_id { get; set; }
 
     public long? ctx_response_msg_id { get; set; }
-
-    [ForeignKey("ctx_queue_id")]
-    [InverseProperty("cj_transactions")]
-    public virtual cj_queue ctx_queue { get; set; } = null!;
-
-    [ForeignKey("ctx_session_id")]
-    [InverseProperty("cj_transactions")]
-    public virtual wcp_session ctx_session { get; set; } = null!;
-
-    [ForeignKey("ctx_terminal_id")]
-    [InverseProperty("cj_transactions")]
-    public virtual terminal ctx_terminal { get; set; } = null!;
 }

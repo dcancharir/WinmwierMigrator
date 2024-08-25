@@ -82,8 +82,4 @@ public partial class game_meter
 
     [Column(TypeName = "money")]
     public decimal? gm_max_progressive_jackpot_amount { get; set; }
-
-    [ForeignKey("gm_terminal_id")]
-    [InverseProperty("game_meters")]
-    public virtual terminal gm_terminal { get; set; } = null!;
 }

@@ -30,7 +30,4 @@ public partial class c2_jackpot_instance
     public decimal c2ji_average { get; set; }
 
     public byte[] c2ji_timestamp { get; set; } = null!;
-
-    [InverseProperty("c2jc_indexNavigation")]
-    public virtual c2_jackpot_counter? c2_jackpot_counter { get; set; }
 }

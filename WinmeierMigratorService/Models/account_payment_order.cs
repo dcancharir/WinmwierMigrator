@@ -102,12 +102,4 @@ public partial class account_payment_order
 
     [StringLength(50)]
     public string? apo_player_name4 { get; set; }
-
-    [ForeignKey("apo_account_id")]
-    [InverseProperty("account_payment_orders")]
-    public virtual account apo_account { get; set; } = null!;
-
-    [ForeignKey("apo_operation_id")]
-    [InverseProperty("account_payment_order")]
-    public virtual account_operation apo_operation { get; set; } = null!;
 }

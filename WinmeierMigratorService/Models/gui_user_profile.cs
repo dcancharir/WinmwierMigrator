@@ -21,10 +21,4 @@ public partial class gui_user_profile
     public int? gup_master_id { get; set; }
 
     public long? gup_master_sequence_id { get; set; }
-
-    [InverseProperty("gpf_profile")]
-    public virtual ICollection<gui_profile_form> gui_profile_forms { get; set; } = new List<gui_profile_form>();
-
-    [InverseProperty("gu_profile")]
-    public virtual ICollection<gui_user> gui_users { get; set; } = new List<gui_user>();
 }

@@ -8,7 +8,6 @@ namespace WinmeierMigratorService.Models;
 
 [PrimaryKey("CM_DATE", "CM_TYPE", "CM_SUB_TYPE", "CM_CURRENCY_ISO_CODE", "CM_CAGE_CURRENCY_TYPE", "CM_CURRENCY_DENOMINATION")]
 [Table("cashier_movements_grouped_by_hour")]
-[Index("cm_timestamp", Name = "IX_cmgh_timestamp", IsUnique = true)]
 [Index("CM_TYPE", "CM_SUB_TYPE", "CM_DATE", Name = "IX_cmgh_type_sub_type_date")]
 [Index("cm_unique_id", Name = "IX_cmgh_unique_id", IsUnique = true)]
 public partial class cashier_movements_grouped_by_hour
@@ -31,6 +30,9 @@ public partial class cashier_movements_grouped_by_hour
     [Column(TypeName = "money")]
     public decimal CM_CURRENCY_DENOMINATION { get; set; }
 
+    [Key]
+    public int CM_CAGE_CURRENCY_TYPE { get; set; }
+
     public int CM_TYPE_COUNT { get; set; }
 
     [Column(TypeName = "money")]
@@ -51,7 +53,4 @@ public partial class cashier_movements_grouped_by_hour
     public byte[]? cm_timestamp { get; set; }
 
     public long cm_unique_id { get; set; }
-
-    [Key]
-    public int CM_CAGE_CURRENCY_TYPE { get; set; }
 }
