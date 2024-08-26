@@ -11,12 +11,13 @@ namespace WinmeierDataWarehouseClient.Winmeier.Models;
 public partial class bank
 {
     [Key]
-    public int bk_bank_id { get; set; }
+	//[DatabaseGenerated(DatabaseGeneratedOption.None)]
+	public int bk_bank_id { get; set; }
 
     public int bk_area_id { get; set; }
 
     [StringLength(50)]
     public string bk_name { get; set; } = null!;
-
-    public byte[]? bk_timestamp { get; set; }
+	//[Timestamp]
+	public byte[]? bk_timestamp { get; set; }
 }

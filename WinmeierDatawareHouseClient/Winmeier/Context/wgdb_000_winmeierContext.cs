@@ -723,9 +723,9 @@ public partial class wgdb_000_winmeierContext : DbContext
 
     public virtual DbSet<wxp_parameter> wxp_parameters { get; set; }
 
-    //     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    // #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-    //         => optionsBuilder.UseSqlServer("Server=.;Database=wgdb_000_winmeier;User Id=sa;Password=147896321;Trusted_Connection=false; TrustServerCertificate=True;");
+//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+//        => optionsBuilder.UseSqlServer("Server=.;Database=wgdb_000_winmeier;User Id=sa;Password=147896321;Trusted_Connection=false; TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -873,6 +873,7 @@ public partial class wgdb_000_winmeierContext : DbContext
 
         modelBuilder.Entity<area>(entity =>
         {
+            entity.Property(e => e.ar_area_id).ValueGeneratedNever();
             entity.Property(e => e.ar_timestamp)
                 .IsRowVersion()
                 .IsConcurrencyToken();
@@ -880,6 +881,7 @@ public partial class wgdb_000_winmeierContext : DbContext
 
         modelBuilder.Entity<bank>(entity =>
         {
+            entity.Property(e => e.bk_bank_id).ValueGeneratedNever();
             entity.Property(e => e.bk_timestamp)
                 .IsRowVersion()
                 .IsConcurrencyToken();

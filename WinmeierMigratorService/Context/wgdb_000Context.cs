@@ -727,1516 +727,1237 @@ public partial class wgdb_000Context : DbContext
 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
 //        => optionsBuilder.UseSqlServer("Server=WG-501-B;Database=wgdb_000;User Id=wg_datareaderMeier1;Password=NH,!se%-nHo_7=Pjy)zJ;Trusted_Connection=false; TrustServerCertificate=True;");
 
-    //protected override void OnModelCreating(ModelBuilder modelBuilder)
-    //{
-    //    modelBuilder.Entity<Card_Generation>(entity =>
-    //    {
-    //        entity.Property(e => e.cg_site_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<ErrorHandling>(entity =>
-    //    {
-    //        entity.HasKey(e => e.pkErrorHandlingID).HasName("PK__ErrorHan__520223CB76976885");
-    //    });
-
-    //    modelBuilder.Entity<MIGRATION_ACCOUNT>(entity =>
-    //    {
-    //        entity.Property(e => e.SOURCE_ACCOUNT_ID).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<PROVIDERS_GAMES_FINALLY>(entity =>
-    //    {
-    //        entity.Property(e => e.PG_GAME_ID).ValueGeneratedOnAdd();
-    //    });
-
-    //    modelBuilder.Entity<Resultado_fragment>(entity =>
-    //    {
-    //        entity.Property(e => e.Clust).UseCollation("Latin1_General_CI_AS_KS_WS");
-    //    });
-
-    //    modelBuilder.Entity<SAVED_CHANGE_POINT>(entity =>
-    //    {
-    //        entity.Property(e => e.AM_MOVEMENT_ID).ValueGeneratedOnAdd();
-    //    });
-
-    //    modelBuilder.Entity<SAVED_EXPIRED_CREDITS_AM>(entity =>
-    //    {
-    //        entity.Property(e => e.am_movement_id).ValueGeneratedOnAdd();
-    //    });
-
-    //    modelBuilder.Entity<SAVED_EXPIRED_CREDITS_CM>(entity =>
-    //    {
-    //        entity.Property(e => e.cm_movement_id).ValueGeneratedOnAdd();
-    //    });
-
-    //    modelBuilder.Entity<TABLESFRAGMENT>(entity =>
-    //    {
-    //        entity.Property(e => e.Clust).UseCollation("Latin1_General_CI_AS_KS_WS");
-    //    });
-
-    //    modelBuilder.Entity<TMP_TERMINALS_TO_BASE_NAME>(entity =>
-    //    {
-    //        entity.Property(e => e.te_terminal_id).ValueGeneratedOnAdd();
-    //        entity.Property(e => e.te_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<Temp_account_point>(entity =>
-    //    {
-    //        entity.Property(e => e.AccountId).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<UNDO_PIN_PAD_TRANSACTION>(entity =>
-    //    {
-    //        entity.HasKey(e => e.uppt_id).HasName("PK_upp_id");
-    //    });
-
-    //    modelBuilder.Entity<VIEW_CARD_BALANCE>(entity =>
-    //    {
-    //        entity.ToView("VIEW_CARD_BALANCE");
-    //    });
-
-    //    modelBuilder.Entity<account>(entity =>
-    //    {
-    //        entity.ToTable(tb =>
-    //            {
-    //                tb.HasTrigger("InHouseAPI_Accounts_Updated");
-    //                tb.HasTrigger("MultiSiteTrigger_SiteAccountUpdate");
-    //                tb.HasTrigger("TRIGGER_PIN_FAILED");
-    //            });
-
-    //        entity.Property(e => e.ac_account_id).ValueGeneratedNever();
-    //        entity.Property(e => e.ac_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<account_document>(entity =>
-    //    {
-    //        entity.ToTable(tb => tb.HasTrigger("MultiSiteTrigger_SiteAccountDocuments"));
-
-    //        entity.Property(e => e.ad_account_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<account_flag>(entity =>
-    //    {
-    //        entity.HasOne(d => d.af_account).WithMany(p => p.account_flags)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_account_flags_accounts");
-
-    //        entity.HasOne(d => d.af_flag).WithMany(p => p.account_flags)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_account_flags_flags");
-    //    });
-
-    //    modelBuilder.Entity<account_major_prize>(entity =>
-    //    {
-    //        entity.Property(e => e.amp_operation_id).ValueGeneratedNever();
-
-    //        entity.HasOne(d => d.amp_account).WithMany(p => p.account_major_prizes)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_account_major_prizes_accounts");
-
-    //        entity.HasOne(d => d.amp_operation).WithOne(p => p.account_major_prize)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_account_major_prizes_account_operations");
-    //    });
-
-    //    modelBuilder.Entity<account_movement>(entity =>
-    //    {
-    //        entity.HasKey(e => e.am_movement_id).HasName("PK_movements");
-
-    //        entity.ToTable(tb => tb.HasTrigger("Trigger_SiteToMultiSite_Points"));
-
-    //        entity.HasOne(d => d.am_account).WithMany(p => p.account_movements)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_account_movements_accounts");
-
-    //        entity.HasOne(d => d.am_play_session).WithMany(p => p.account_movements).HasConstraintName("FK_account_movements_play_sessions");
-    //    });
-
-    //    modelBuilder.Entity<account_payment_order>(entity =>
-    //    {
-    //        entity.HasKey(e => e.apo_operation_id).HasName("PK_account_payment_order");
-
-    //        entity.Property(e => e.apo_operation_id).ValueGeneratedNever();
-
-    //        entity.HasOne(d => d.apo_account).WithMany(p => p.account_payment_orders)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_account_payment_order_accounts");
-
-    //        entity.HasOne(d => d.apo_operation).WithOne(p => p.account_payment_order)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_account_payment_order_account_operations");
-    //    });
-
-    //    modelBuilder.Entity<account_photo>(entity =>
-    //    {
-    //        entity.ToTable("account_photo", tb => tb.HasTrigger("InHouseAPI_Photo_Updated"));
-
-    //        entity.Property(e => e.aph_account_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<account_points_cache>(entity =>
-    //    {
-    //        entity.Property(e => e.apc_account_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<account_points_expired_list>(entity =>
-    //    {
-    //        entity.Property(e => e.apel_account_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<afip_log>(entity =>
-    //    {
-    //        entity.HasKey(e => e.afl_id).HasName("PK_AFIP_LOG");
-    //    });
-
-    //    modelBuilder.Entity<alarm>(entity =>
-    //    {
-    //        entity.ToTable(tb => tb.HasTrigger("Trigger_Alarms_Buffer_ETL"));
-
-    //        entity.Property(e => e.al_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<alarm_category>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.alc_category_id, e.alc_language_id }).HasName("PK_category");
-    //    });
-
-    //    modelBuilder.Entity<alarm_group>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.alg_alarm_group_id, e.alg_language_id }).HasName("PK_alarm_group");
-    //    });
-
-    //    modelBuilder.Entity<alesis_terminal>(entity =>
-    //    {
-    //        entity.Property(e => e.at_terminal_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<alesis_view>(entity =>
-    //    {
-    //        entity.ToView("alesis_view");
-
-    //        entity.Property(e => e.ac_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //        entity.Property(e => e.ps_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //        entity.Property(e => e.te_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<area>(entity =>
-    //    {
-    //        entity.Property(e => e.ar_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<audit_3g>(entity =>
-    //    {
-    //        entity.Property(e => e.a3gs_id).ValueGeneratedOnAdd();
-    //    });
-
-    //    modelBuilder.Entity<bank>(entity =>
-    //    {
-    //        entity.Property(e => e.bk_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-
-    //        entity.HasOne(d => d.bk_area).WithMany(p => p.banks)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_banks_areas");
-    //    });
-
-    //    modelBuilder.Entity<bank_transaction>(entity =>
-    //    {
-    //        entity.Property(e => e.bt_operation_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<blacklist_file_imported>(entity =>
-    //    {
-    //        entity.Property(e => e.blkf_id).ValueGeneratedOnAdd();
-    //    });
-
-    //    modelBuilder.Entity<blacklist_file_imported_type>(entity =>
-    //    {
-    //        entity.HasKey(e => e.bklt_id_type).HasName("PK__blacklis__DEE9EDAE7B1C2680");
-    //    });
-
-    //    modelBuilder.Entity<bucket>(entity =>
-    //    {
-    //        entity.Property(e => e.bu_bucket_id).ValueGeneratedNever();
-    //        entity.Property(e => e.bu_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<buckets_multiplier_schedule>(entity =>
-    //    {
-    //        entity.Property(e => e.bm_bucket_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<buffer_terminals_time_disconnected>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.bttd_site_id, e.bttd_terminal_id, e.bttd_working_day }).HasName("PK_bttd_id");
-    //    });
-
-    //    modelBuilder.Entity<c2_draw_audit>(entity =>
-    //    {
-    //        entity.HasKey(e => e.da_draw_id).HasName("PK_draw_audit");
-    //    });
-
-    //    modelBuilder.Entity<c2_draw_audit_play>(entity =>
-    //    {
-    //        entity.HasKey(e => e.dap_play_id).HasName("PK_Draw_Audit_Plays");
-
-    //        entity.HasOne(d => d.dap_draw).WithMany(p => p.c2_draw_audit_plays)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_c2_draw_audit_plays_c2_draw_audit");
-    //    });
-
-    //    modelBuilder.Entity<c2_draw_audit_plays_v>(entity =>
-    //    {
-    //        entity.ToView("c2_draw_audit_plays_v");
-    //    });
-
-    //    modelBuilder.Entity<c2_jackpot_counter>(entity =>
-    //    {
-    //        entity.Property(e => e.c2jc_index).ValueGeneratedNever();
-
-    //        entity.HasOne(d => d.c2jc_indexNavigation).WithOne(p => p.c2_jackpot_counter)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_c2_jackpot_counters_c2_jackpot_instances");
-    //    });
-
-    //    modelBuilder.Entity<c2_jackpot_history>(entity =>
-    //    {
-    //        entity.HasOne(d => d.c2jh_play).WithMany(p => p.c2_jackpot_histories).HasConstraintName("FK_Jackpot_History_Draw_Audit_Plays");
-    //    });
-
-    //    modelBuilder.Entity<c2_jackpot_instance>(entity =>
-    //    {
-    //        entity.Property(e => e.c2ji_index).ValueGeneratedNever();
-    //        entity.Property(e => e.c2ji_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<c2_jackpot_parameter>(entity =>
-    //    {
-    //        entity.Property(e => e.c2jp_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<c2_winning_pattern>(entity =>
-    //    {
-    //        entity.Property(e => e.w2p_pattern_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<cage_concept>(entity =>
-    //    {
-    //        entity.Property(e => e.cc_concept_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<cage_movement>(entity =>
-    //    {
-    //        entity.HasKey(e => e.cgm_movement_id).HasName("PK_CAGE_MOVEMENTS");
-
-    //        entity.HasMany(d => d.cm_movements).WithMany(p => p.cgm_movements)
-    //            .UsingEntity<Dictionary<string, object>>(
-    //                "cage_cashier_movement_relation",
-    //                r => r.HasOne<cashier_movement>().WithMany()
-    //                    .HasForeignKey("cm_movement_id")
-    //                    .OnDelete(DeleteBehavior.ClientSetNull)
-    //                    .HasConstraintName("FK_cage_cashier_movement_relation"),
-    //                l => l.HasOne<cage_movement>().WithMany()
-    //                    .HasForeignKey("cgm_movement_id")
-    //                    .OnDelete(DeleteBehavior.ClientSetNull)
-    //                    .HasConstraintName("FK_cage_movement_relation"),
-    //                j =>
-    //                {
-    //                    j.HasKey("cgm_movement_id", "cm_movement_id").HasName("PK_CAGE_CASHIER_MOVEMENT_RELATION");
-    //                    j.ToTable("cage_cashier_movement_relation");
-    //                });
-    //    });
-
-    //    modelBuilder.Entity<cage_movement_detail>(entity =>
-    //    {
-    //        entity.HasKey(e => e.cmd_cage_movement_detail_id).HasName("PK_CAGE_MOVEMENT_DETAIL");
-
-    //        entity.HasOne(d => d.cmd_movement).WithMany(p => p.cage_movement_details)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_cage_movement_details_cage_movement");
-    //    });
-
-    //    modelBuilder.Entity<cage_pending_movement>(entity =>
-    //    {
-    //        entity.HasKey(e => e.cpm_movement_id).HasName("PK_CAGE_PENDING_MOVEMENT");
-
-    //        entity.Property(e => e.cpm_movement_id).ValueGeneratedNever();
-
-    //        entity.HasOne(d => d.cpm_movement).WithOne(p => p.cage_pending_movement)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_pending_movement_cage_movement");
-    //    });
-
-    //    modelBuilder.Entity<cage_session>(entity =>
-    //    {
-    //        entity.HasKey(e => e.cgs_cage_session_id).HasName("PK_CAGE_SESSIONS");
-    //    });
-
-    //    modelBuilder.Entity<cage_source_target>(entity =>
-    //    {
-    //        entity.HasKey(e => e.cst_source_target_id).HasName("PK_CAGE_SOURCE_TARGET");
-
-    //        entity.Property(e => e.cst_source_target_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<card>(entity =>
-    //    {
-    //        entity.Property(e => e.ca_trackdata).IsFixedLength();
-    //        entity.Property(e => e.ca_pin).IsFixedLength();
-    //    });
-
-    //    modelBuilder.Entity<cashier_movement>(entity =>
-    //    {
-    //        entity.HasOne(d => d.cm_session).WithMany(p => p.cashier_movements)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_cashier_movements_cashier_sessions");
-    //    });
-
-    //    modelBuilder.Entity<cashier_movements_grouped_by_hour>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.CM_DATE, e.CM_TYPE, e.CM_SUB_TYPE, e.CM_CURRENCY_ISO_CODE, e.CM_CAGE_CURRENCY_TYPE, e.CM_CURRENCY_DENOMINATION }).HasName("PK_CASHIER_MOVEMENTS_GROUPED_BY_HOUR");
-
-    //        entity.Property(e => e.cm_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //        entity.Property(e => e.cm_unique_id).ValueGeneratedOnAdd();
-    //    });
-
-    //    modelBuilder.Entity<cashier_movements_grouped_by_session_id>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.CM_SESSION_ID, e.CM_TYPE, e.CM_SUB_TYPE, e.CM_CURRENCY_ISO_CODE, e.CM_CAGE_CURRENCY_TYPE, e.CM_CURRENCY_DENOMINATION }).HasName("PK_CASHIER_MOVEMENTS_GROUPED_BY_SESSION_ID");
-    //    });
-
-    //    modelBuilder.Entity<cashier_movements_pending_history>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.cmph_movement_id, e.cmph_sub_type }).HasName("pk_cashier_movements_pending_history");
-    //    });
-
-    //    modelBuilder.Entity<cashier_voucher>(entity =>
-    //    {
-    //        entity.HasOne(d => d.cv_session).WithMany(p => p.cashier_vouchers).HasConstraintName("FK_cashier_vouchers_cashier_sessions");
-    //    });
-
-    //    modelBuilder.Entity<cfdi_register>(entity =>
-    //    {
-    //        entity.Property(e => e.cr_operation_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<chips_sets_chip>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.csc_chip_id, e.csc_set_id }).HasName("PK_chip_id_set_id");
-    //    });
-
-    //    modelBuilder.Entity<chips_stock>(entity =>
-    //    {
-    //        entity.HasKey(e => e.chsk_chip_id).HasName("PK_chips_stocks");
-
-    //        entity.Property(e => e.chsk_chip_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<cj_queue>(entity =>
-    //    {
-    //        entity.Property(e => e.cq_queue_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<cj_transaction>(entity =>
-    //    {
-    //        entity.Property(e => e.ctx_status).HasComment("0 - Running, 1 - Finished");
-
-    //        entity.HasOne(d => d.ctx_queue).WithMany(p => p.cj_transactions)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_cj_transactions_cj_queues");
-
-    //        entity.HasOne(d => d.ctx_session).WithMany(p => p.cj_transactions)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_cj_transactions_wcp_sessions");
-
-    //        entity.HasOne(d => d.ctx_terminal).WithMany(p => p.cj_transactions)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_cj_transactions_terminals");
-    //    });
-
-    //    modelBuilder.Entity<closing_stock>(entity =>
-    //    {
-    //        entity.Property(e => e.cs_cashier_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<countr>(entity =>
-    //    {
-    //        entity.HasKey(e => e.cr_countr_id).HasName("PK_cr_countr_id");
-    //    });
-
-    //    modelBuilder.Entity<countr_log>(entity =>
-    //    {
-    //        entity.HasKey(e => e.crl_id).HasName("PK_crl_id");
-    //    });
-
-    //    modelBuilder.Entity<countr_session>(entity =>
-    //    {
-    //        entity.HasKey(e => e.crs_session_id).HasName("PK_crs_session_id");
-    //    });
-
-    //    modelBuilder.Entity<credit_line>(entity =>
-    //    {
-    //        entity.HasKey(e => e.cl_id).HasName("PK_cl_id");
-
-    //        entity.Property(e => e.cl_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<credit_line_movement>(entity =>
-    //    {
-    //        entity.HasKey(e => e.clm_id).HasName("PK_clm_id");
-
-    //        entity.Property(e => e.clm_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<currency_denomination>(entity =>
-    //    {
-    //        entity.HasOne(d => d.cud_iso_codeNavigation).WithMany(p => p.currency_denominations)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_currency_denominations_currencies");
-    //    });
-
-    //    modelBuilder.Entity<customer>(entity =>
-    //    {
-    //        entity.Property(e => e.cus_customer_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<customer_bucket>(entity =>
-    //    {
-    //        entity.Property(e => e.cbu_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<customer_entrance>(entity =>
-    //    {
-    //        entity.Property(e => e.cue_coupon).IsFixedLength();
-    //    });
-
-    //    modelBuilder.Entity<customer_entrances_price>(entity =>
-    //    {
-    //        entity.HasKey(e => e.cuep_price_id).HasName("PK_Customer_Entrances_Prices");
-    //    });
-
-    //    modelBuilder.Entity<customer_notice>(entity =>
-    //    {
-    //        entity.Property(e => e.cn_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<customer_visit>(entity =>
-    //    {
-    //        entity.ToTable(tb => tb.HasTrigger("InHouseAPI_Customer_Visits_Insert"));
-    //    });
-
-    //    modelBuilder.Entity<db_user>(entity =>
-    //    {
-    //        entity.Property(e => e.du_password).IsFixedLength();
-    //    });
-
-    //    modelBuilder.Entity<deleted_account>(entity =>
-    //    {
-    //        entity.Property(e => e.ac_account_id).ValueGeneratedOnAdd();
-    //        entity.Property(e => e.ac_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<draw_ticket>(entity =>
-    //    {
-    //        entity.Property(e => e.dt_id).ValueGeneratedOnAdd();
-    //    });
-
-    //    modelBuilder.Entity<elp01_space_request>(entity =>
-    //    {
-    //        entity.Property(e => e.es_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<event_history>(entity =>
-    //    {
-    //        entity.Property(e => e.eh_event_id).ValueGeneratedOnAdd();
-    //        entity.Property(e => e.eh_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-
-    //        entity.HasOne(d => d.eh_terminal).WithMany(p => p.event_histories)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_event_history_terminals");
-    //    });
-
-    //    modelBuilder.Entity<external_validation_operation>(entity =>
-    //    {
-    //        entity.HasKey(e => e.evo_id).HasName("PK_EXTERNAL_VALIDATION_OPERATION");
-    //    });
-
-    //    modelBuilder.Entity<fbm_log>(entity =>
-    //    {
-    //        entity.HasKey(e => e.fl_id).HasName("PK_fl_id");
-    //    });
-
-    //    modelBuilder.Entity<game>(entity =>
-    //    {
-    //        entity.Property(e => e.gm_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<game_meter>(entity =>
-    //    {
-    //        entity.HasOne(d => d.gm_terminal).WithMany(p => p.game_meters)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_game_meters_terminals");
-    //    });
-
-    //    modelBuilder.Entity<gamegateway_bet>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.gb_game_id, e.gb_game_instance_id, e.gb_partner_id, e.gb_transaction_type, e.gb_transaction_id, e.gb_account_id }).HasName("PK_gamegateway_bets_1");
-
-    //        entity.Property(e => e.gb_last_updated)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<gamegateway_command_message>(entity =>
-    //    {
-    //        entity.HasKey(e => e.gcm_id).HasName("pk_gamegateway_command_messages");
-    //    });
-
-    //    modelBuilder.Entity<gamegateway_game>(entity =>
-    //    {
-    //        entity.Property(e => e.gg_last_updated)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<gamegateway_game_instance>(entity =>
-    //    {
-    //        entity.Property(e => e.ggi_last_updated)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<games_v>(entity =>
-    //    {
-    //        entity.ToView("games_v");
-
-    //        entity.Property(e => e.gm_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<games_v2>(entity =>
-    //    {
-    //        entity.ToView("games_v2");
-    //    });
-
-    //    modelBuilder.Entity<gaming_table>(entity =>
-    //    {
-    //        entity.HasKey(e => e.gt_gaming_table_id).HasName("pk_gaming_tables");
-
-    //        entity.Property(e => e.gt_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-
-    //        entity.HasOne(d => d.gt_area).WithMany(p => p.gaming_tables).HasConstraintName("fk_gaming_tables_areas");
-
-    //        entity.HasOne(d => d.gt_cur_iso_codeNavigation).WithMany(p => p.gaming_tables).HasConstraintName("fk_gaming_tables_currencies");
-
-    //        entity.HasOne(d => d.gt_type).WithMany(p => p.gaming_tables)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("fk_gt_type_id");
-    //    });
-
-    //    modelBuilder.Entity<gaming_tables_connected>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.gmc_gamingtable_id, e.gmc_gaming_day }).HasName("PK_Gaming_Tables_Connected");
-    //    });
-
-    //    modelBuilder.Entity<gaming_tables_type>(entity =>
-    //    {
-    //        entity.HasKey(e => e.gtt_gaming_table_type_id).HasName("pk_gaming_tables_types");
-    //    });
-
-    //    modelBuilder.Entity<gds_group>(entity =>
-    //    {
-    //        entity.Property(e => e.gg_group_is_explicit).HasComment("0 - Group defined through SQL definition; 1 - Group defined by explicit assignment");
-    //    });
-
-    //    modelBuilder.Entity<gds_group_element>(entity =>
-    //    {
-    //        entity.Property(e => e.gge_is_group).HasComment("0 - Single Element; 1 - Group Definition");
-
-    //        entity.HasOne(d => d.gge_group).WithMany()
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_gds_group_elements_gds_groups");
-    //    });
-
-    //    modelBuilder.Entity<gds_platform>(entity =>
-    //    {
-    //        entity.Property(e => e.gp_platform_id).ValueGeneratedOnAdd();
-    //    });
-
-    //    modelBuilder.Entity<gds_schedule_step>(entity =>
-    //    {
-    //        entity.HasOne(d => d.gss_schedule).WithMany()
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_gds_schedule_steps_gds_schedule_time");
-    //    });
-
-    //    modelBuilder.Entity<gds_schedule_time>(entity =>
-    //    {
-    //        entity.HasKey(e => e.gst_schedule_id).HasName("PK_gst_schedule_time");
-
-    //        entity.Property(e => e.gst_recurrence).HasComment("0 - One time; 1 - Daily; 2 - Week Days; 3 - Weekends; 4 - Weekly");
-    //    });
-
-    //    modelBuilder.Entity<group_element>(entity =>
-    //    {
-    //        entity.HasOne(d => d.ge_group).WithMany(p => p.group_elements)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_group_elements_groups");
-    //    });
-
-    //    modelBuilder.Entity<gt_play_session>(entity =>
-    //    {
-    //        entity.Property(e => e.gtps_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<gt_sessions_conciliate>(entity =>
-    //    {
-    //        entity.HasKey(e => e.gtsc_session_id).HasName("PK_gaming_tables_sessions_conciliate");
-
-    //        entity.Property(e => e.gtsc_session_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<gui_audit>(entity =>
-    //    {
-    //        entity.HasOne(d => d.ga_gui_user).WithMany(p => p.gui_audits).HasConstraintName("FK_gui_audit_gui_users");
-    //    });
-
-    //    modelBuilder.Entity<gui_profile_form>(entity =>
-    //    {
-    //        entity.HasOne(d => d.gpf_profile).WithMany(p => p.gui_profile_forms)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_gui_profile_forms_gui_user_profiles");
-
-    //        entity.HasOne(d => d.gui_form).WithMany(p => p.gui_profile_forms)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_gui_profile_forms_gui_forms");
-    //    });
-
-    //    modelBuilder.Entity<gui_user>(entity =>
-    //    {
-    //        entity.Property(e => e.gu_user_id).ValueGeneratedNever();
-    //        entity.Property(e => e.gu_password).IsFixedLength();
-    //        entity.Property(e => e.gu_password_h1).IsFixedLength();
-    //        entity.Property(e => e.gu_password_h2).IsFixedLength();
-    //        entity.Property(e => e.gu_password_h3).IsFixedLength();
-    //        entity.Property(e => e.gu_password_h4).IsFixedLength();
-    //        entity.Property(e => e.gu_password_h5).IsFixedLength();
-    //        entity.Property(e => e.gu_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //        entity.Property(e => e.gu_user_type).HasComment("0 - USER, 1 - SYSTEM, 10 - SUPERUSER");
-
-    //        entity.HasOne(d => d.gu_profile).WithMany(p => p.gui_users)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_gui_users_gui_user_profiles");
-    //    });
-
-    //    modelBuilder.Entity<gui_user_profile>(entity =>
-    //    {
-    //        entity.Property(e => e.gup_profile_id).ValueGeneratedNever();
-    //        entity.Property(e => e.gup_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<h_m2d_smh>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.x2d_date, e.x2d_weekday, e.x2d_id, e.x2d_meter_id, e.x2d_meter_item }).HasName("PK_M2D_SMH");
-    //    });
-
-    //    modelBuilder.Entity<h_m2d_tmh>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.x2d_date, e.x2d_weekday, e.x2d_id, e.x2d_meter_id, e.x2d_meter_item }).HasName("PK_M2D_TMH");
-    //    });
-
-    //    modelBuilder.Entity<h_pvh>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.pvh_account_id, e.pvh_date }).HasName("pk_h_pvh");
-    //    });
-
-    //    modelBuilder.Entity<h_t2d_smh>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.x2d_date, e.x2d_weekday, e.x2d_id, e.x2d_meter_id, e.x2d_meter_item }).HasName("PK_T2D_SMH");
-    //    });
-
-    //    modelBuilder.Entity<h_t2d_tmh>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.x2d_date, e.x2d_weekday, e.x2d_id, e.x2d_meter_id, e.x2d_meter_item }).HasName("PK_T2D_TMH");
-    //    });
-
-    //    modelBuilder.Entity<h_w2d_smh>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.x2d_date, e.x2d_weekday, e.x2d_id, e.x2d_meter_id, e.x2d_meter_item }).HasName("PK_W2D_SMH");
-    //    });
-
-    //    modelBuilder.Entity<h_w2d_tmh>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.x2d_date, e.x2d_weekday, e.x2d_id, e.x2d_meter_id, e.x2d_meter_item }).HasName("PK_W2D_TMH");
-    //    });
-
-    //    modelBuilder.Entity<h_x2d_control>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.x2d_date, e.x2d_meter_type }).HasName("PK_H_X2D_CONTROL");
-    //    });
-
-    //    modelBuilder.Entity<h_y2d_smh>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.x2d_date, e.x2d_weekday, e.x2d_id, e.x2d_meter_id, e.x2d_meter_item }).HasName("PK_Y2D_SMH");
-    //    });
-
-    //    modelBuilder.Entity<h_y2d_tmh>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.x2d_date, e.x2d_weekday, e.x2d_id, e.x2d_meter_id, e.x2d_meter_item }).HasName("PK_Y2D_TMH");
-    //    });
-
-    //    modelBuilder.Entity<handpay>(entity =>
-    //    {
-    //        entity.ToTable(tb => tb.HasTrigger("Trigger_Handpays_Buffer_ETL"));
-
-    //        entity.Property(e => e.HP_TIMESTAMP)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<hpc_meter>(entity =>
-    //    {
-    //        entity.Property(e => e.hpc_terminal_id).ValueGeneratedNever();
-
-    //        entity.HasOne(d => d.hpc_terminal).WithOne(p => p.hpc_meter)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_hpc_meter_terminals");
-    //    });
-
-    //    modelBuilder.Entity<identification_type>(entity =>
-    //    {
-    //        entity.Property(e => e.idt_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<invalid_play_sessions_to_player_tracking>(entity =>
-    //    {
-    //        entity.Property(e => e.ips_unique_ud).ValueGeneratedOnAdd();
-    //    });
-
-    //    modelBuilder.Entity<lcd_functionality>(entity =>
-    //    {
-    //        entity.HasKey(e => e.fun_function_id).HasName("PK_LCD_functionalities");
-
-    //        entity.Property(e => e.fun_function_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<lcd_image>(entity =>
-    //    {
-    //        entity.HasKey(e => e.cim_image_id).HasName("PK_LCD_images");
-
-    //        entity.Property(e => e.cim_image_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<lcd_message>(entity =>
-    //    {
-    //        entity.Property(e => e.msg_unique_id).ValueGeneratedNever();
-    //        entity.Property(e => e.msg_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<licence>(entity =>
-    //    {
-    //        entity.Property(e => e.wl_id).ValueGeneratedOnAdd();
-    //    });
-
-    //    modelBuilder.Entity<machine_denom_stats_per_hour>(entity =>
-    //    {
-    //        entity.Property(e => e.mdsh_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<machine_meter>(entity =>
-    //    {
-    //        entity.Property(e => e.mm_terminal_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<machine_stats_per_hour>(entity =>
-    //    {
-    //        entity.Property(e => e.msh_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<mailing_instance>(entity =>
-    //    {
-    //        entity.Property(e => e.mi_prog_data).HasComment("Time in minutes (0..1439)");
-    //        entity.Property(e => e.mi_status).HasComment("0: Pending; 1: Running; 2: Successful; 3: Failed");
-    //        entity.Property(e => e.mi_type).HasComment("1: Statistics");
-    //    });
-
-    //    modelBuilder.Entity<mailing_programming>(entity =>
-    //    {
-    //        entity.HasKey(e => e.mp_prog_id).HasName("PK_mailing_scheduling");
-
-    //        entity.Property(e => e.mp_schedule_time_from).HasComment("Time in minutes (0..1439)");
-    //        entity.Property(e => e.mp_schedule_time_to).HasComment("Time in minutes (0..1439)");
-    //        entity.Property(e => e.mp_type).HasComment("1: Statistics");
-    //    });
-
-    //    modelBuilder.Entity<major_prizes_to_generate>(entity =>
-    //    {
-    //        entity.Property(e => e.mpg_operation_id).ValueGeneratedNever();
-
-    //        entity.HasOne(d => d.mpg_operation).WithOne(p => p.major_prizes_to_generate)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_major_prizes_to_generate_account_major_prizes");
-    //    });
-
-    //    modelBuilder.Entity<mapp_image>(entity =>
-    //    {
-    //        entity.HasKey(e => e.im_image_id).HasName("PK_Image");
-    //    });
-
-    //    modelBuilder.Entity<mapp_section_schema>(entity =>
-    //    {
-    //        entity.HasKey(e => e.ss_section_schema_id).HasName("PK_SectionSchema");
-
-    //        entity.HasOne(d => d.ss_background_image).WithMany(p => p.mapp_section_schemass_background_images).HasConstraintName("FK_SectionSchema_Image_ImageId");
-
-    //        entity.HasOne(d => d.ss_icon_image).WithMany(p => p.mapp_section_schemass_icon_images).HasConstraintName("FK_SectionSchema_Image_IconId");
-
-    //        entity.HasOne(d => d.ss_parent).WithMany(p => p.Inversess_parent).HasConstraintName("FK_SectionSchema_SectionSchema_ParentId");
-    //    });
-
-    //    modelBuilder.Entity<meter>(entity =>
-    //    {
-    //        entity.Property(e => e.me_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-
-    //        entity.HasOne(d => d.me_terminal).WithMany(p => p.meters)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_meters_terminals");
-    //    });
-
-    //    modelBuilder.Entity<migration_account1>(entity =>
-    //    {
-    //        entity.Property(e => e.ac_account_id).ValueGeneratedOnAdd();
-    //        entity.Property(e => e.ac_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<migration_play_session>(entity =>
-    //    {
-    //        entity.Property(e => e.ps_play_session_id).ValueGeneratedOnAdd();
-    //        entity.Property(e => e.ps_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<mobile_bank>(entity =>
-    //    {
-    //        entity.HasKey(e => e.mb_account_id).HasName("PK_mobile_bank");
-
-    //        entity.Property(e => e.mb_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<money_collection>(entity =>
-    //    {
-    //        entity.HasIndex(e => e.mc_collection_datetime, "IX_mc_collection_datetime").HasFillFactor(90);
-    //    });
-
-    //    modelBuilder.Entity<money_collection_meter>(entity =>
-    //    {
-    //        entity.Property(e => e.mcm_session_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<money_meter>(entity =>
-    //    {
-    //        entity.Property(e => e.mm_cash_type).HasComment("1-CashIn, 2-CashOut");
-    //        entity.Property(e => e.mm_money_type).HasComment("1-Note, 2-Coin");
-    //        entity.Property(e => e.mm_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-
-    //        entity.HasOne(d => d.mm_meter).WithMany(p => p.money_meters)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_money_meters_meters");
-    //    });
-
-    //    modelBuilder.Entity<ms_pending_game_play_session>(entity =>
-    //    {
-    //        entity.HasKey(e => e.mps_play_session_id).HasName("PK_ms_site_pending_play_sessions");
-
-    //        entity.Property(e => e.mps_play_session_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<ms_pending_task68_work_datum>(entity =>
-    //    {
-    //        entity.HasKey(e => e.mptwd_operation_id).HasName("PK_TASK68_WORK_DATA");
-
-    //        entity.Property(e => e.mptwd_operation_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<ms_site_pending_account>(entity =>
-    //    {
-    //        entity.Property(e => e.spa_account_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<ms_site_pending_account_document>(entity =>
-    //    {
-    //        entity.HasKey(e => e.pad_account_id).HasName("PK_ms_pending_accounts_documents");
-
-    //        entity.Property(e => e.pad_account_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<ms_site_pending_account_movement>(entity =>
-    //    {
-    //        entity.Property(e => e.spm_movement_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<ms_site_pending_last_activity>(entity =>
-    //    {
-    //        entity.Property(e => e.laa_account_id).ValueGeneratedNever();
-    //        entity.Property(e => e.laa_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<ms_site_task>(entity =>
-    //    {
-    //        entity.HasKey(e => e.st_task_id).HasName("PK_ms_site_synch_control");
-
-    //        entity.Property(e => e.st_task_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<note_counter>(entity =>
-    //    {
-    //        entity.Property(e => e.nc_application_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<occupancy_sensor>(entity =>
-    //    {
-    //        entity.HasKey(e => e.ose_id).HasName("PK_sensor_inout");
-    //    });
-
-    //    modelBuilder.Entity<online_player_tracking>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.opt_type, e.opt_account_id }).HasName("pk_online_player_tracking");
-    //    });
-
-    //    modelBuilder.Entity<operation_voucher_parameter>(entity =>
-    //    {
-    //        entity.Property(e => e.ovp_operation_code).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<operations_after_hour>(entity =>
-    //    {
-    //        entity.HasKey(e => e.oah_from).HasName("PK_OPERATIONS_AFTER_HOURS");
-    //    });
-
-    //    modelBuilder.Entity<operations_schedule_status>(entity =>
-    //    {
-    //        entity.HasKey(e => e.oss_type).HasName("PK_operations_allowed");
-
-    //        entity.Property(e => e.oss_type).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<pending_play_sessions_to_player_tracking>(entity =>
-    //    {
-    //        entity.Property(e => e.pps_session_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<pinpad_cashier_terminal>(entity =>
-    //    {
-    //        entity.HasKey(e => e.pct_id).HasName("PK_pct_id");
-    //    });
-
-    //    modelBuilder.Entity<pinpad_transaction>(entity =>
-    //    {
-    //        entity.HasKey(e => e.pt_id).HasName("PK_pt_id");
-    //    });
-
-    //    modelBuilder.Entity<play>(entity =>
-    //    {
-    //        entity.HasOne(d => d.pl_terminal).WithMany(p => p.plays)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_plays_terminals");
-    //    });
-
-    //    modelBuilder.Entity<play_session>(entity =>
-    //    {
-    //        entity.ToTable(tb => tb.HasTrigger("InHouseAPI_Play_Sessions_Insert"));
-
-    //        entity.Property(e => e.ps_status).HasComment("0-Opened; 1-Closed; 2-Abandoned");
-    //        entity.Property(e => e.ps_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-
-    //        entity.HasOne(d => d.ps_terminal).WithMany(p => p.play_sessions)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_play_sessions_terminals");
-    //    });
-
-    //    modelBuilder.Entity<plays_v>(entity =>
-    //    {
-    //        entity.ToView("plays_v");
-
-    //        entity.Property(e => e.pl_play_id).ValueGeneratedOnAdd();
-    //    });
-
-    //    modelBuilder.Entity<promotion_flag>(entity =>
-    //    {
-    //        entity.HasOne(d => d.pf_flag).WithMany(p => p.promotion_flags)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_promotion_flags_flags");
-    //    });
-
-    //    modelBuilder.Entity<provider>(entity =>
-    //    {
-    //        entity.ToTable(tb => tb.HasTrigger("ProviderTerminalTrigger"));
-
-    //        entity.Property(e => e.pv_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<providers_game>(entity =>
-    //    {
-    //        entity.Property(e => e.pg_game_id).ValueGeneratedOnAdd();
-    //    });
-
-    //    modelBuilder.Entity<report_tool_config>(entity =>
-    //    {
-    //        entity.HasKey(e => e.rtc_report_tool_id).HasName("PK__report_t__91E6C95D13B2CA20");
-    //    });
-
-    //    modelBuilder.Entity<reserved_terminal_configuration>(entity =>
-    //    {
-    //        entity.HasKey(e => e.rtc_holder_level).HasName("pk_reserved_terminal_configuration");
-
-    //        entity.Property(e => e.rtc_holder_level).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<reserved_terminal_transaction>(entity =>
-    //    {
-    //        entity.HasKey(e => e.rtt_transaction_id).HasName("PK__reserved__BABB3A3812748D24");
-
-    //        entity.HasOne(d => d.rtt_account).WithMany(p => p.reserved_terminal_transactions)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK__reserved___rtt_a__145CD596");
-
-    //        entity.HasOne(d => d.rtt_terminal).WithMany(p => p.reserved_terminal_transactions)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK__reserved___rtt_t__1550F9CF");
-    //    });
-
-    //    modelBuilder.Entity<sales_per_hour>(entity =>
-    //    {
-    //        entity.Property(e => e.sph_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //        entity.Property(e => e.sph_unique_id).ValueGeneratedOnAdd();
-    //    });
-
-    //    modelBuilder.Entity<sales_per_hour_v>(entity =>
-    //    {
-    //        entity.ToView("sales_per_hour_v");
-    //    });
-
-    //    modelBuilder.Entity<sales_per_hour_v2>(entity =>
-    //    {
-    //        entity.ToView("sales_per_hour_v2");
-    //    });
-
-    //    modelBuilder.Entity<sas_meters_adjustment>(entity =>
-    //    {
-    //        entity.Property(e => e.tma_unique_id).ValueGeneratedOnAdd();
-    //    });
-
-    //    modelBuilder.Entity<sas_meters_catalog>(entity =>
-    //    {
-    //        entity.Property(e => e.smc_meter_code).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<sas_meters_group>(entity =>
-    //    {
-    //        entity.Property(e => e.smg_group_id).ValueGeneratedNever();
-
-    //        entity.HasMany(d => d.smcg_meter_codes).WithMany(p => p.smcg_groups)
-    //            .UsingEntity<Dictionary<string, object>>(
-    //                "sas_meters_catalog_per_group",
-    //                r => r.HasOne<sas_meters_catalog>().WithMany()
-    //                    .HasForeignKey("smcg_meter_code")
-    //                    .OnDelete(DeleteBehavior.ClientSetNull)
-    //                    .HasConstraintName("FK_sas_meters_catalog_per_group_sas_meters_catalog"),
-    //                l => l.HasOne<sas_meters_group>().WithMany()
-    //                    .HasForeignKey("smcg_group_id")
-    //                    .OnDelete(DeleteBehavior.ClientSetNull)
-    //                    .HasConstraintName("FK_sas_meters_catalog_per_group_sas_meters_groups"),
-    //                j =>
-    //                {
-    //                    j.HasKey("smcg_group_id", "smcg_meter_code");
-    //                    j.ToTable("sas_meters_catalog_per_group");
-    //                });
-    //    });
-
-    //    modelBuilder.Entity<sequence>(entity =>
-    //    {
-    //        entity.Property(e => e.seq_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<service_internet_connection>(entity =>
-    //    {
-    //        entity.Property(e => e.sic_protocol).IsFixedLength();
-    //    });
-
-    //    modelBuilder.Entity<site>(entity =>
-    //    {
-    //        entity.Property(e => e.st_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<site_jackpot_instance>(entity =>
-    //    {
-    //        entity.Property(e => e.sji_index).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<site_service>(entity =>
-    //    {
-    //        entity.Property(e => e.ss_id).ValueGeneratedOnAdd();
-    //    });
-
-    //    modelBuilder.Entity<sph_control>(entity =>
-    //    {
-    //        entity.Property(e => e.sphc_last_play_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<stacker>(entity =>
-    //    {
-    //        entity.Property(e => e.st_stacker_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<terminal>(entity =>
-    //    {
-    //        entity.ToTable(tb =>
-    //            {
-    //                tb.HasTrigger("TerminalProviderTrigger");
-    //                tb.HasTrigger("TriggerValidateRegistrationCode");
-    //            });
-
-    //        entity.Property(e => e.te_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-
-    //        entity.HasOne(d => d.te_bank).WithMany(p => p.terminals)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_terminals_banks");
-
-    //        entity.HasOne(d => d.te_server).WithMany(p => p.Inversete_server).HasConstraintName("FK_terminals_terminal_servers");
-    //    });
-
-    //    modelBuilder.Entity<terminal_denom_game>(entity =>
-    //    {
-    //        entity.Property(e => e.tdg_terminal_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<terminal_draws_recharge>(entity =>
-    //    {
-    //        entity.HasKey(e => e.tdr_id).HasName("PK_tdr_id");
-    //    });
-
-    //    modelBuilder.Entity<terminal_game_translation>(entity =>
-    //    {
-    //        entity.Property(e => e.tgt_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<terminal_sas_meter>(entity =>
-    //    {
-    //        entity.ToTable(tb => tb.HasTrigger("Trigger_TSM_Buffer_ETL"));
-    //    });
-
-    //    modelBuilder.Entity<terminal_sas_meters_history>(entity =>
-    //    {
-    //        entity.ToTable("terminal_sas_meters_history", tb => tb.HasTrigger("Trigger_TSMH_Buffer_ETL"));
-    //    });
-
-    //    modelBuilder.Entity<terminal_software_version>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.tsv_client_id, e.tsv_build_id, e.tsv_terminal_type }).HasName("PK_kiosk_software_versions");
-    //    });
-
-    //    modelBuilder.Entity<terminal_status>(entity =>
-    //    {
-    //        entity.Property(e => e.ts_terminal_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<terminal_type>(entity =>
-    //    {
-    //        entity.Property(e => e.tt_type).ValueGeneratedNever();
-    //        entity.Property(e => e.tt_name).IsFixedLength();
-    //    });
-
-    //    modelBuilder.Entity<terminals_connected>(entity =>
-    //    {
-    //        entity.ToTable("terminals_connected", tb => tb.HasTrigger("Trigger_ttc_buffer_ETL"));
-
-    //        entity.Property(e => e.tc_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<terminals_last_changed>(entity =>
-    //    {
-    //        entity.ToView("terminals_last_changed");
-    //    });
-
-    //    modelBuilder.Entity<terminals_last_play_session>(entity =>
-    //    {
-    //        entity.ToView("terminals_last_play_session");
-    //    });
-
-    //    modelBuilder.Entity<terminals_time_disconnected>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.ttd_site_id, e.ttd_terminal_id, e.ttd_working_day }).HasName("PK_ttd_id");
-
-    //        entity.ToTable("terminals_time_disconnected", tb => tb.HasTrigger("Trigger_ttd_buffer_ETL"));
-    //    });
-
-    //    modelBuilder.Entity<terminals_view>(entity =>
-    //    {
-    //        entity.ToView("terminals_view");
-
-    //        entity.Property(e => e.ac_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //        entity.Property(e => e.ps_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //        entity.Property(e => e.te_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-    //    });
-
-    //    modelBuilder.Entity<ticket>(entity =>
-    //    {
-    //        entity.ToTable(tb => tb.HasTrigger("Trigger_Audit_TicketStatusChange"));
-    //    });
-
-    //    modelBuilder.Entity<tickets_audit_status_change>(entity =>
-    //    {
-    //        entity.HasKey(e => new { e.tia_id, e.tia_validation_number }).HasName("PK_tickets_audit");
-
-    //        entity.Property(e => e.tia_id).ValueGeneratedOnAdd();
-    //    });
-
-    //    modelBuilder.Entity<v_TotalEntrancesByVisit>(entity =>
-    //    {
-    //        entity.ToView("v_TotalEntrancesByVisits");
-    //    });
-
-    //    modelBuilder.Entity<v_TotalEntriesByMonth>(entity =>
-    //    {
-    //        entity.ToView("v_TotalEntriesByMonth");
-    //    });
-
-    //    modelBuilder.Entity<v_TotalVisitsByDay>(entity =>
-    //    {
-    //        entity.ToView("v_TotalVisitsByDay");
-    //    });
-
-    //    modelBuilder.Entity<vw_money_collection_contadores_diario>(entity =>
-    //    {
-    //        entity.ToView("vw_money_collection_contadores_diarios");
-
-    //        entity.Property(e => e.mc_collection_id).ValueGeneratedOnAdd();
-    //    });
-
-    //    modelBuilder.Entity<wc2_message>(entity =>
-    //    {
-    //        entity.HasOne(d => d.w2m_session).WithMany(p => p.wc2_messages).HasConstraintName("FK_wc2_messages_wc2_sessions");
-
-    //        entity.HasOne(d => d.w2m_terminal).WithMany(p => p.wc2_messages).HasConstraintName("FK_wc2_messages_terminals");
-    //    });
-
-    //    modelBuilder.Entity<wc2_session>(entity =>
-    //    {
-    //        entity.ToTable(tb => tb.HasTrigger("Trigger_wc2_sessions_Buffer_ETL"));
-
-    //        entity.Property(e => e.w2s_status).HasComment("0 - Opened, 1 - Closed, 2 - Abandoned, 3 - Timeout");
-    //        entity.Property(e => e.w2s_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-
-    //        entity.HasOne(d => d.w2s_terminal).WithMany(p => p.wc2_sessions)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_wc2_sessions_terminals");
-    //    });
-
-    //    modelBuilder.Entity<wc2_transaction>(entity =>
-    //    {
-    //        entity.Property(e => e.w2tx_status).HasComment("0 - Running, 1 - Finished");
-
-    //        entity.HasOne(d => d.w2tx_session).WithMany(p => p.wc2_transactions)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_wc2_transactions_wc2_sessions");
-
-    //        entity.HasOne(d => d.w2tx_terminal).WithMany(p => p.wc2_transactions)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_wc2_transactions_terminals");
-    //    });
-
-    //    modelBuilder.Entity<wcp_command>(entity =>
-    //    {
-    //        entity.HasIndex(e => e.cmd_created, "IX_wcp_cmd_created").HasFillFactor(90);
-    //    });
-
-    //    modelBuilder.Entity<wcp_message>(entity =>
-    //    {
-    //        entity.HasOne(d => d.wm_session).WithMany(p => p.wcp_messages).HasConstraintName("FK_wcp_messages_wcp_sessions");
-
-    //        entity.HasOne(d => d.wm_terminal).WithMany(p => p.wcp_messages).HasConstraintName("FK_wcp_messages_terminals");
-    //    });
-
-    //    modelBuilder.Entity<wcp_services_to_cj_queue>(entity =>
-    //    {
-    //        entity.HasKey(e => e.wscq_service_id).HasName("PK_wcp_services_to_cj_queues_1");
-
-    //        entity.Property(e => e.wscq_service_id).ValueGeneratedNever();
-
-    //        entity.HasOne(d => d.wscq_queue).WithMany(p => p.wcp_services_to_cj_queues)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_wcp_services_to_cj_queues_cj_queues");
-
-    //        entity.HasOne(d => d.wscq_service).WithOne(p => p.wcp_services_to_cj_queue)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_wcp_services_to_cj_queues_wcp_services");
-    //    });
-
-    //    modelBuilder.Entity<wcp_session>(entity =>
-    //    {
-    //        entity.ToTable(tb => tb.HasTrigger("Trigger_wcp_sessions_Buffer_ETL"));
-
-    //        entity.Property(e => e.ws_status).HasComment("0 - Opened, 1 - Closed, 2 - Abandoned, 3 - Timeout");
-    //        entity.Property(e => e.ws_timestamp)
-    //            .IsRowVersion()
-    //            .IsConcurrencyToken();
-
-    //        entity.HasOne(d => d.ws_terminal).WithMany(p => p.wcp_sessions)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_wcp_sessions_terminals");
-    //    });
-
-    //    modelBuilder.Entity<wcp_transaction>(entity =>
-    //    {
-    //        entity.Property(e => e.wtx_status).HasComment("0 - Running, 1 - Finished");
-
-    //        entity.HasOne(d => d.wtx_session).WithMany(p => p.wcp_transactions)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_wcp_transactions_wcp_sessions");
-
-    //        entity.HasOne(d => d.wtx_terminal).WithMany(p => p.wcp_transactions)
-    //            .OnDelete(DeleteBehavior.ClientSetNull)
-    //            .HasConstraintName("FK_wcp_transactions_terminals");
-    //    });
-
-    //    modelBuilder.Entity<wkt_ad>(entity =>
-    //    {
-    //        entity.HasKey(e => e.ad_id).HasName("PK_WKT_Ads");
-    //    });
-
-    //    modelBuilder.Entity<wkt_ad_step>(entity =>
-    //    {
-    //        entity.HasOne(d => d.as_ad).WithMany(p => p.wkt_ad_steps)
-    //            .OnDelete(DeleteBehavior.Cascade)
-    //            .HasConstraintName("FK_wkt_ad_steps_wkt_ads");
-    //    });
-
-    //    modelBuilder.Entity<wkt_ad_step_detail>(entity =>
-    //    {
-    //        entity.Property(e => e.ascr_step_id).ValueGeneratedNever();
-
-    //        entity.HasOne(d => d.ascr_resource).WithMany(p => p.wkt_ad_step_details).HasConstraintName("FK_wkt_ad_step_details_wkt_resources");
-
-    //        entity.HasOne(d => d.ascr_step).WithOne(p => p.wkt_ad_step_detail).HasConstraintName("FK_wkt_ad_step_details_wkt_ad_steps");
-    //    });
-
-    //    modelBuilder.Entity<wkt_functionality>(entity =>
-    //    {
-    //        entity.Property(e => e.fun_function_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<wkt_image>(entity =>
-    //    {
-    //        entity.Property(e => e.cim_image_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<wkt_player_info_field>(entity =>
-    //    {
-    //        entity.Property(e => e.pif_field_id).ValueGeneratedNever();
-    //    });
-
-    //    modelBuilder.Entity<wkt_resource>(entity =>
-    //    {
-    //        entity.HasKey(e => e.res_resource_id).HasName("PK_WKT_Resources");
-    //    });
-
-    //    modelBuilder.Entity<wsp_player_recharge>(entity =>
-    //    {
-    //        entity.Property(e => e.wpr_status).HasComment("1 - Pending; 2 - In Progress; 3 - Error; 4 - Ok; 5 - Timeout");
-    //    });
-
-    //    modelBuilder.Entity<wwp_status>(entity =>
-    //    {
-    //        entity.Property(e => e.wwp_type).ValueGeneratedNever();
-    //    });
-
-    //    OnModelCreatingPartial(modelBuilder);
-    //}
-
-    //partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Card_Generation>(entity =>
+        {
+            entity.Property(e => e.cg_site_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<ErrorHandling>(entity =>
+        {
+            entity.HasKey(e => e.pkErrorHandlingID).HasName("PK__ErrorHan__520223CB76976885");
+        });
+
+        modelBuilder.Entity<MIGRATION_ACCOUNT>(entity =>
+        {
+            entity.Property(e => e.SOURCE_ACCOUNT_ID).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<PROVIDERS_GAMES_FINALLY>(entity =>
+        {
+            entity.Property(e => e.PG_GAME_ID).ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<Resultado_fragment>(entity =>
+        {
+            entity.Property(e => e.Clust).UseCollation("Latin1_General_CI_AS_KS_WS");
+        });
+
+        modelBuilder.Entity<SAVED_CHANGE_POINT>(entity =>
+        {
+            entity.Property(e => e.AM_MOVEMENT_ID).ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<SAVED_EXPIRED_CREDITS_AM>(entity =>
+        {
+            entity.Property(e => e.am_movement_id).ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<SAVED_EXPIRED_CREDITS_CM>(entity =>
+        {
+            entity.Property(e => e.cm_movement_id).ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<TABLESFRAGMENT>(entity =>
+        {
+            entity.Property(e => e.Clust).UseCollation("Latin1_General_CI_AS_KS_WS");
+        });
+
+        modelBuilder.Entity<TMP_TERMINALS_TO_BASE_NAME>(entity =>
+        {
+            entity.Property(e => e.te_terminal_id).ValueGeneratedOnAdd();
+            entity.Property(e => e.te_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<Temp_account_point>(entity =>
+        {
+            entity.Property(e => e.AccountId).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<UNDO_PIN_PAD_TRANSACTION>(entity =>
+        {
+            entity.HasKey(e => e.uppt_id).HasName("PK_upp_id");
+        });
+        modelBuilder.Entity<account>(entity =>
+        {
+            entity.ToTable(tb =>
+                {
+                    tb.HasTrigger("InHouseAPI_Accounts_Updated");
+                    tb.HasTrigger("MultiSiteTrigger_SiteAccountUpdate");
+                    tb.HasTrigger("TRIGGER_PIN_FAILED");
+                });
+
+            entity.Property(e => e.ac_account_id).ValueGeneratedNever();
+            entity.Property(e => e.ac_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<account_document>(entity =>
+        {
+            entity.ToTable(tb => tb.HasTrigger("MultiSiteTrigger_SiteAccountDocuments"));
+
+            entity.Property(e => e.ad_account_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<account_flag>(entity =>
+        {
+
+        });
+
+        modelBuilder.Entity<account_major_prize>(entity =>
+        {
+            entity.Property(e => e.amp_operation_id).ValueGeneratedNever();
+
+
+        });
+
+        modelBuilder.Entity<account_movement>(entity =>
+        {
+            entity.HasKey(e => e.am_movement_id).HasName("PK_movements");
+
+            entity.ToTable(tb => tb.HasTrigger("Trigger_SiteToMultiSite_Points"));
+
+
+        });
+
+        modelBuilder.Entity<account_payment_order>(entity =>
+        {
+            entity.HasKey(e => e.apo_operation_id).HasName("PK_account_payment_order");
+
+            entity.Property(e => e.apo_operation_id).ValueGeneratedNever();
+
+
+        });
+
+        modelBuilder.Entity<account_photo>(entity =>
+        {
+            entity.ToTable("account_photo", tb => tb.HasTrigger("InHouseAPI_Photo_Updated"));
+
+            entity.Property(e => e.aph_account_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<account_points_cache>(entity =>
+        {
+            entity.Property(e => e.apc_account_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<account_points_expired_list>(entity =>
+        {
+            entity.Property(e => e.apel_account_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<afip_log>(entity =>
+        {
+            entity.HasKey(e => e.afl_id).HasName("PK_AFIP_LOG");
+        });
+
+        modelBuilder.Entity<alarm>(entity =>
+        {
+            entity.ToTable(tb => tb.HasTrigger("Trigger_Alarms_Buffer_ETL"));
+
+            entity.Property(e => e.al_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<alarm_category>(entity =>
+        {
+            entity.HasKey(e => new { e.alc_category_id, e.alc_language_id }).HasName("PK_category");
+        });
+
+        modelBuilder.Entity<alarm_group>(entity =>
+        {
+            entity.HasKey(e => new { e.alg_alarm_group_id, e.alg_language_id }).HasName("PK_alarm_group");
+        });
+
+        modelBuilder.Entity<alesis_terminal>(entity =>
+        {
+            entity.Property(e => e.at_terminal_id).ValueGeneratedNever();
+        });
+
+
+        modelBuilder.Entity<area>(entity =>
+        {
+            entity.Property(e => e.ar_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<audit_3g>(entity =>
+        {
+            entity.Property(e => e.a3gs_id).ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<bank>(entity =>
+        {
+            entity.Property(e => e.bk_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+
+        });
+
+        modelBuilder.Entity<bank_transaction>(entity =>
+        {
+            entity.Property(e => e.bt_operation_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<blacklist_file_imported>(entity =>
+        {
+            entity.Property(e => e.blkf_id).ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<blacklist_file_imported_type>(entity =>
+        {
+            entity.HasKey(e => e.bklt_id_type).HasName("PK__blacklis__DEE9EDAE7B1C2680");
+        });
+
+        modelBuilder.Entity<bucket>(entity =>
+        {
+            entity.Property(e => e.bu_bucket_id).ValueGeneratedNever();
+            entity.Property(e => e.bu_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<buckets_multiplier_schedule>(entity =>
+        {
+            entity.Property(e => e.bm_bucket_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<buffer_terminals_time_disconnected>(entity =>
+        {
+            entity.HasKey(e => new { e.bttd_site_id, e.bttd_terminal_id, e.bttd_working_day }).HasName("PK_bttd_id");
+        });
+
+        modelBuilder.Entity<c2_draw_audit>(entity =>
+        {
+            entity.HasKey(e => e.da_draw_id).HasName("PK_draw_audit");
+        });
+
+        modelBuilder.Entity<c2_draw_audit_play>(entity =>
+        {
+            entity.HasKey(e => e.dap_play_id).HasName("PK_Draw_Audit_Plays");
+
+
+        });
+
+
+        modelBuilder.Entity<c2_jackpot_counter>(entity =>
+        {
+            entity.Property(e => e.c2jc_index).ValueGeneratedNever();
+
+
+        });
+
+        modelBuilder.Entity<c2_jackpot_history>(entity =>
+        {
+
+        });
+
+        modelBuilder.Entity<c2_jackpot_instance>(entity =>
+        {
+            entity.Property(e => e.c2ji_index).ValueGeneratedNever();
+            entity.Property(e => e.c2ji_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<c2_jackpot_parameter>(entity =>
+        {
+            entity.Property(e => e.c2jp_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<c2_winning_pattern>(entity =>
+        {
+            entity.Property(e => e.w2p_pattern_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<cage_concept>(entity =>
+        {
+            entity.Property(e => e.cc_concept_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<cage_movement>(entity =>
+        {
+            entity.HasKey(e => e.cgm_movement_id).HasName("PK_CAGE_MOVEMENTS");
+
+
+        });
+
+        modelBuilder.Entity<cage_movement_detail>(entity =>
+        {
+            entity.HasKey(e => e.cmd_cage_movement_detail_id).HasName("PK_CAGE_MOVEMENT_DETAIL");
+
+
+        });
+
+        modelBuilder.Entity<cage_pending_movement>(entity =>
+        {
+            entity.HasKey(e => e.cpm_movement_id).HasName("PK_CAGE_PENDING_MOVEMENT");
+
+            entity.Property(e => e.cpm_movement_id).ValueGeneratedNever();
+
+        });
+
+        modelBuilder.Entity<cage_session>(entity =>
+        {
+            entity.HasKey(e => e.cgs_cage_session_id).HasName("PK_CAGE_SESSIONS");
+        });
+
+        modelBuilder.Entity<cage_source_target>(entity =>
+        {
+            entity.HasKey(e => e.cst_source_target_id).HasName("PK_CAGE_SOURCE_TARGET");
+
+            entity.Property(e => e.cst_source_target_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<card>(entity =>
+        {
+            entity.Property(e => e.ca_trackdata).IsFixedLength();
+            entity.Property(e => e.ca_pin).IsFixedLength();
+        });
+
+        modelBuilder.Entity<cashier_movement>(entity =>
+        {
+
+        });
+
+        modelBuilder.Entity<cashier_movements_grouped_by_hour>(entity =>
+        {
+            entity.HasKey(e => new { e.CM_DATE, e.CM_TYPE, e.CM_SUB_TYPE, e.CM_CURRENCY_ISO_CODE, e.CM_CAGE_CURRENCY_TYPE, e.CM_CURRENCY_DENOMINATION }).HasName("PK_CASHIER_MOVEMENTS_GROUPED_BY_HOUR");
+
+            entity.Property(e => e.cm_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+            entity.Property(e => e.cm_unique_id).ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<cashier_movements_grouped_by_session_id>(entity =>
+        {
+            entity.HasKey(e => new { e.CM_SESSION_ID, e.CM_TYPE, e.CM_SUB_TYPE, e.CM_CURRENCY_ISO_CODE, e.CM_CAGE_CURRENCY_TYPE, e.CM_CURRENCY_DENOMINATION }).HasName("PK_CASHIER_MOVEMENTS_GROUPED_BY_SESSION_ID");
+        });
+
+        modelBuilder.Entity<cashier_movements_pending_history>(entity =>
+        {
+            entity.HasKey(e => new { e.cmph_movement_id, e.cmph_sub_type }).HasName("pk_cashier_movements_pending_history");
+        });
+
+        modelBuilder.Entity<cashier_voucher>(entity =>
+        {
+
+        });
+
+        modelBuilder.Entity<cfdi_register>(entity =>
+        {
+            entity.Property(e => e.cr_operation_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<chips_sets_chip>(entity =>
+        {
+            entity.HasKey(e => new { e.csc_chip_id, e.csc_set_id }).HasName("PK_chip_id_set_id");
+        });
+
+        modelBuilder.Entity<chips_stock>(entity =>
+        {
+            entity.HasKey(e => e.chsk_chip_id).HasName("PK_chips_stocks");
+
+            entity.Property(e => e.chsk_chip_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<cj_queue>(entity =>
+        {
+            entity.Property(e => e.cq_queue_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<cj_transaction>(entity =>
+        {
+            entity.Property(e => e.ctx_status).HasComment("0 - Running, 1 - Finished");
+
+        });
+
+        modelBuilder.Entity<closing_stock>(entity =>
+        {
+            entity.Property(e => e.cs_cashier_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<countr>(entity =>
+        {
+            entity.HasKey(e => e.cr_countr_id).HasName("PK_cr_countr_id");
+        });
+
+        modelBuilder.Entity<countr_log>(entity =>
+        {
+            entity.HasKey(e => e.crl_id).HasName("PK_crl_id");
+        });
+
+        modelBuilder.Entity<countr_session>(entity =>
+        {
+            entity.HasKey(e => e.crs_session_id).HasName("PK_crs_session_id");
+        });
+
+        modelBuilder.Entity<credit_line>(entity =>
+        {
+            entity.HasKey(e => e.cl_id).HasName("PK_cl_id");
+
+            entity.Property(e => e.cl_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<credit_line_movement>(entity =>
+        {
+            entity.HasKey(e => e.clm_id).HasName("PK_clm_id");
+
+            entity.Property(e => e.clm_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<currency_denomination>(entity =>
+        {
+
+        });
+
+        modelBuilder.Entity<customer>(entity =>
+        {
+            entity.Property(e => e.cus_customer_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<customer_bucket>(entity =>
+        {
+            entity.Property(e => e.cbu_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<customer_entrance>(entity =>
+        {
+            entity.Property(e => e.cue_coupon).IsFixedLength();
+        });
+
+        modelBuilder.Entity<customer_entrances_price>(entity =>
+        {
+            entity.HasKey(e => e.cuep_price_id).HasName("PK_Customer_Entrances_Prices");
+        });
+
+        modelBuilder.Entity<customer_notice>(entity =>
+        {
+            entity.Property(e => e.cn_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<customer_visit>(entity =>
+        {
+            entity.ToTable(tb => tb.HasTrigger("InHouseAPI_Customer_Visits_Insert"));
+        });
+
+        modelBuilder.Entity<db_user>(entity =>
+        {
+            entity.Property(e => e.du_password).IsFixedLength();
+        });
+
+        modelBuilder.Entity<deleted_account>(entity =>
+        {
+            entity.Property(e => e.ac_account_id).ValueGeneratedOnAdd();
+            entity.Property(e => e.ac_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<draw_ticket>(entity =>
+        {
+            entity.Property(e => e.dt_id).ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<elp01_space_request>(entity =>
+        {
+            entity.Property(e => e.es_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<event_history>(entity =>
+        {
+            entity.Property(e => e.eh_event_id).ValueGeneratedOnAdd();
+            entity.Property(e => e.eh_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+
+
+        });
+
+        modelBuilder.Entity<external_validation_operation>(entity =>
+        {
+            entity.HasKey(e => e.evo_id).HasName("PK_EXTERNAL_VALIDATION_OPERATION");
+        });
+
+        modelBuilder.Entity<fbm_log>(entity =>
+        {
+            entity.HasKey(e => e.fl_id).HasName("PK_fl_id");
+        });
+
+        modelBuilder.Entity<game>(entity =>
+        {
+            entity.Property(e => e.gm_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<game_meter>(entity =>
+        {
+
+        });
+
+        modelBuilder.Entity<gamegateway_bet>(entity =>
+        {
+            entity.HasKey(e => new { e.gb_game_id, e.gb_game_instance_id, e.gb_partner_id, e.gb_transaction_type, e.gb_transaction_id, e.gb_account_id }).HasName("PK_gamegateway_bets_1");
+
+            entity.Property(e => e.gb_last_updated)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<gamegateway_command_message>(entity =>
+        {
+            entity.HasKey(e => e.gcm_id).HasName("pk_gamegateway_command_messages");
+        });
+
+        modelBuilder.Entity<gamegateway_game>(entity =>
+        {
+            entity.Property(e => e.gg_last_updated)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<gamegateway_game_instance>(entity =>
+        {
+            entity.Property(e => e.ggi_last_updated)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+
+
+
+
+        modelBuilder.Entity<gaming_table>(entity =>
+        {
+            entity.HasKey(e => e.gt_gaming_table_id).HasName("pk_gaming_tables");
+
+            entity.Property(e => e.gt_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+
+
+        });
+
+        modelBuilder.Entity<gaming_tables_connected>(entity =>
+        {
+            entity.HasKey(e => new { e.gmc_gamingtable_id, e.gmc_gaming_day }).HasName("PK_Gaming_Tables_Connected");
+        });
+
+        modelBuilder.Entity<gaming_tables_type>(entity =>
+        {
+            entity.HasKey(e => e.gtt_gaming_table_type_id).HasName("pk_gaming_tables_types");
+        });
+
+        modelBuilder.Entity<gds_group>(entity =>
+        {
+            entity.Property(e => e.gg_group_is_explicit).HasComment("0 - Group defined through SQL definition; 1 - Group defined by explicit assignment");
+        });
+
+        modelBuilder.Entity<gds_group_element>(entity =>
+        {
+            entity.Property(e => e.gge_is_group).HasComment("0 - Single Element; 1 - Group Definition");
+
+        });
+
+        modelBuilder.Entity<gds_platform>(entity =>
+        {
+            entity.Property(e => e.gp_platform_id).ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<gds_schedule_step>(entity =>
+        {
+
+        });
+
+        modelBuilder.Entity<gds_schedule_time>(entity =>
+        {
+            entity.HasKey(e => e.gst_schedule_id).HasName("PK_gst_schedule_time");
+
+            entity.Property(e => e.gst_recurrence).HasComment("0 - One time; 1 - Daily; 2 - Week Days; 3 - Weekends; 4 - Weekly");
+        });
+
+        modelBuilder.Entity<group_element>(entity =>
+        {
+
+        });
+
+        modelBuilder.Entity<gt_play_session>(entity =>
+        {
+            entity.Property(e => e.gtps_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<gt_sessions_conciliate>(entity =>
+        {
+            entity.HasKey(e => e.gtsc_session_id).HasName("PK_gaming_tables_sessions_conciliate");
+
+            entity.Property(e => e.gtsc_session_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<gui_audit>(entity =>
+        {
+        });
+
+        modelBuilder.Entity<gui_profile_form>(entity =>
+        {
+        });
+
+        modelBuilder.Entity<gui_user>(entity =>
+        {
+            entity.Property(e => e.gu_user_id).ValueGeneratedNever();
+            entity.Property(e => e.gu_password).IsFixedLength();
+            entity.Property(e => e.gu_password_h1).IsFixedLength();
+            entity.Property(e => e.gu_password_h2).IsFixedLength();
+            entity.Property(e => e.gu_password_h3).IsFixedLength();
+            entity.Property(e => e.gu_password_h4).IsFixedLength();
+            entity.Property(e => e.gu_password_h5).IsFixedLength();
+            entity.Property(e => e.gu_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+            entity.Property(e => e.gu_user_type).HasComment("0 - USER, 1 - SYSTEM, 10 - SUPERUSER");
+
+        });
+
+        modelBuilder.Entity<gui_user_profile>(entity =>
+        {
+            entity.Property(e => e.gup_profile_id).ValueGeneratedNever();
+            entity.Property(e => e.gup_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<h_m2d_smh>(entity =>
+        {
+            entity.HasKey(e => new { e.x2d_date, e.x2d_weekday, e.x2d_id, e.x2d_meter_id, e.x2d_meter_item }).HasName("PK_M2D_SMH");
+        });
+
+        modelBuilder.Entity<h_m2d_tmh>(entity =>
+        {
+            entity.HasKey(e => new { e.x2d_date, e.x2d_weekday, e.x2d_id, e.x2d_meter_id, e.x2d_meter_item }).HasName("PK_M2D_TMH");
+        });
+
+        modelBuilder.Entity<h_pvh>(entity =>
+        {
+            entity.HasKey(e => new { e.pvh_account_id, e.pvh_date }).HasName("pk_h_pvh");
+        });
+
+        modelBuilder.Entity<h_t2d_smh>(entity =>
+        {
+            entity.HasKey(e => new { e.x2d_date, e.x2d_weekday, e.x2d_id, e.x2d_meter_id, e.x2d_meter_item }).HasName("PK_T2D_SMH");
+        });
+
+        modelBuilder.Entity<h_t2d_tmh>(entity =>
+        {
+            entity.HasKey(e => new { e.x2d_date, e.x2d_weekday, e.x2d_id, e.x2d_meter_id, e.x2d_meter_item }).HasName("PK_T2D_TMH");
+        });
+
+        modelBuilder.Entity<h_w2d_smh>(entity =>
+        {
+            entity.HasKey(e => new { e.x2d_date, e.x2d_weekday, e.x2d_id, e.x2d_meter_id, e.x2d_meter_item }).HasName("PK_W2D_SMH");
+        });
+
+        modelBuilder.Entity<h_w2d_tmh>(entity =>
+        {
+            entity.HasKey(e => new { e.x2d_date, e.x2d_weekday, e.x2d_id, e.x2d_meter_id, e.x2d_meter_item }).HasName("PK_W2D_TMH");
+        });
+
+        modelBuilder.Entity<h_x2d_control>(entity =>
+        {
+            entity.HasKey(e => new { e.x2d_date, e.x2d_meter_type }).HasName("PK_H_X2D_CONTROL");
+        });
+
+        modelBuilder.Entity<h_y2d_smh>(entity =>
+        {
+            entity.HasKey(e => new { e.x2d_date, e.x2d_weekday, e.x2d_id, e.x2d_meter_id, e.x2d_meter_item }).HasName("PK_Y2D_SMH");
+        });
+
+        modelBuilder.Entity<h_y2d_tmh>(entity =>
+        {
+            entity.HasKey(e => new { e.x2d_date, e.x2d_weekday, e.x2d_id, e.x2d_meter_id, e.x2d_meter_item }).HasName("PK_Y2D_TMH");
+        });
+
+        modelBuilder.Entity<handpay>(entity =>
+        {
+            entity.ToTable(tb => tb.HasTrigger("Trigger_Handpays_Buffer_ETL"));
+
+            entity.Property(e => e.HP_TIMESTAMP)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<hpc_meter>(entity =>
+        {
+            entity.Property(e => e.hpc_terminal_id).ValueGeneratedNever();
+
+        });
+
+        modelBuilder.Entity<identification_type>(entity =>
+        {
+            entity.Property(e => e.idt_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<invalid_play_sessions_to_player_tracking>(entity =>
+        {
+            entity.Property(e => e.ips_unique_ud).ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<lcd_functionality>(entity =>
+        {
+            entity.HasKey(e => e.fun_function_id).HasName("PK_LCD_functionalities");
+
+            entity.Property(e => e.fun_function_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<lcd_image>(entity =>
+        {
+            entity.HasKey(e => e.cim_image_id).HasName("PK_LCD_images");
+
+            entity.Property(e => e.cim_image_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<lcd_message>(entity =>
+        {
+            entity.Property(e => e.msg_unique_id).ValueGeneratedNever();
+            entity.Property(e => e.msg_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<licence>(entity =>
+        {
+            entity.Property(e => e.wl_id).ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<machine_denom_stats_per_hour>(entity =>
+        {
+            entity.Property(e => e.mdsh_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<machine_meter>(entity =>
+        {
+            entity.Property(e => e.mm_terminal_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<machine_stats_per_hour>(entity =>
+        {
+            entity.Property(e => e.msh_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<mailing_instance>(entity =>
+        {
+            entity.Property(e => e.mi_prog_data).HasComment("Time in minutes (0..1439)");
+            entity.Property(e => e.mi_status).HasComment("0: Pending; 1: Running; 2: Successful; 3: Failed");
+            entity.Property(e => e.mi_type).HasComment("1: Statistics");
+        });
+
+        modelBuilder.Entity<mailing_programming>(entity =>
+        {
+            entity.HasKey(e => e.mp_prog_id).HasName("PK_mailing_scheduling");
+
+            entity.Property(e => e.mp_schedule_time_from).HasComment("Time in minutes (0..1439)");
+            entity.Property(e => e.mp_schedule_time_to).HasComment("Time in minutes (0..1439)");
+            entity.Property(e => e.mp_type).HasComment("1: Statistics");
+        });
+
+        modelBuilder.Entity<major_prizes_to_generate>(entity =>
+        {
+            entity.Property(e => e.mpg_operation_id).ValueGeneratedNever();
+
+        });
+
+        modelBuilder.Entity<mapp_image>(entity =>
+        {
+            entity.HasKey(e => e.im_image_id).HasName("PK_Image");
+        });
+
+        modelBuilder.Entity<mapp_section_schema>(entity =>
+        {
+            entity.HasKey(e => e.ss_section_schema_id).HasName("PK_SectionSchema");
+
+        });
+
+        modelBuilder.Entity<meter>(entity =>
+        {
+            entity.Property(e => e.me_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+
+        });
+
+        modelBuilder.Entity<migration_account1>(entity =>
+        {
+            entity.Property(e => e.ac_account_id).ValueGeneratedOnAdd();
+            entity.Property(e => e.ac_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<migration_play_session>(entity =>
+        {
+            entity.Property(e => e.ps_play_session_id).ValueGeneratedOnAdd();
+            entity.Property(e => e.ps_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<mobile_bank>(entity =>
+        {
+            entity.HasKey(e => e.mb_account_id).HasName("PK_mobile_bank");
+
+            entity.Property(e => e.mb_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<money_collection>(entity =>
+        {
+            entity.HasIndex(e => e.mc_collection_datetime, "IX_mc_collection_datetime").HasFillFactor(90);
+        });
+
+        modelBuilder.Entity<money_collection_meter>(entity =>
+        {
+            entity.Property(e => e.mcm_session_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<money_meter>(entity =>
+        {
+            entity.Property(e => e.mm_cash_type).HasComment("1-CashIn, 2-CashOut");
+            entity.Property(e => e.mm_money_type).HasComment("1-Note, 2-Coin");
+            entity.Property(e => e.mm_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+
+        });
+
+        modelBuilder.Entity<ms_pending_game_play_session>(entity =>
+        {
+            entity.HasKey(e => e.mps_play_session_id).HasName("PK_ms_site_pending_play_sessions");
+
+            entity.Property(e => e.mps_play_session_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<ms_pending_task68_work_datum>(entity =>
+        {
+            entity.HasKey(e => e.mptwd_operation_id).HasName("PK_TASK68_WORK_DATA");
+
+            entity.Property(e => e.mptwd_operation_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<ms_site_pending_account>(entity =>
+        {
+            entity.Property(e => e.spa_account_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<ms_site_pending_account_document>(entity =>
+        {
+            entity.HasKey(e => e.pad_account_id).HasName("PK_ms_pending_accounts_documents");
+
+            entity.Property(e => e.pad_account_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<ms_site_pending_account_movement>(entity =>
+        {
+            entity.Property(e => e.spm_movement_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<ms_site_pending_last_activity>(entity =>
+        {
+            entity.Property(e => e.laa_account_id).ValueGeneratedNever();
+            entity.Property(e => e.laa_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<ms_site_task>(entity =>
+        {
+            entity.HasKey(e => e.st_task_id).HasName("PK_ms_site_synch_control");
+
+            entity.Property(e => e.st_task_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<note_counter>(entity =>
+        {
+            entity.Property(e => e.nc_application_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<occupancy_sensor>(entity =>
+        {
+            entity.HasKey(e => e.ose_id).HasName("PK_sensor_inout");
+        });
+
+        modelBuilder.Entity<online_player_tracking>(entity =>
+        {
+            entity.HasKey(e => new { e.opt_type, e.opt_account_id }).HasName("pk_online_player_tracking");
+        });
+
+        modelBuilder.Entity<operation_voucher_parameter>(entity =>
+        {
+            entity.Property(e => e.ovp_operation_code).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<operations_after_hour>(entity =>
+        {
+            entity.HasKey(e => e.oah_from).HasName("PK_OPERATIONS_AFTER_HOURS");
+        });
+
+        modelBuilder.Entity<operations_schedule_status>(entity =>
+        {
+            entity.HasKey(e => e.oss_type).HasName("PK_operations_allowed");
+
+            entity.Property(e => e.oss_type).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<pending_play_sessions_to_player_tracking>(entity =>
+        {
+            entity.Property(e => e.pps_session_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<pinpad_cashier_terminal>(entity =>
+        {
+            entity.HasKey(e => e.pct_id).HasName("PK_pct_id");
+        });
+
+        modelBuilder.Entity<pinpad_transaction>(entity =>
+        {
+            entity.HasKey(e => e.pt_id).HasName("PK_pt_id");
+        });
+
+        modelBuilder.Entity<play>(entity =>
+        {
+        });
+
+        modelBuilder.Entity<play_session>(entity =>
+        {
+            entity.ToTable(tb => tb.HasTrigger("InHouseAPI_Play_Sessions_Insert"));
+
+            entity.Property(e => e.ps_status).HasComment("0-Opened; 1-Closed; 2-Abandoned");
+            entity.Property(e => e.ps_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+
+        });
+
+
+        modelBuilder.Entity<promotion_flag>(entity =>
+        {
+        });
+
+        modelBuilder.Entity<provider>(entity =>
+        {
+            entity.ToTable(tb => tb.HasTrigger("ProviderTerminalTrigger"));
+
+            entity.Property(e => e.pv_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<providers_game>(entity =>
+        {
+            entity.Property(e => e.pg_game_id).ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<report_tool_config>(entity =>
+        {
+            entity.HasKey(e => e.rtc_report_tool_id).HasName("PK__report_t__91E6C95D13B2CA20");
+        });
+
+        modelBuilder.Entity<reserved_terminal_configuration>(entity =>
+        {
+            entity.HasKey(e => e.rtc_holder_level).HasName("pk_reserved_terminal_configuration");
+
+            entity.Property(e => e.rtc_holder_level).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<reserved_terminal_transaction>(entity =>
+        {
+            entity.HasKey(e => e.rtt_transaction_id).HasName("PK__reserved__BABB3A3812748D24");
+
+        });
+
+        modelBuilder.Entity<sales_per_hour>(entity =>
+        {
+            entity.Property(e => e.sph_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+            entity.Property(e => e.sph_unique_id).ValueGeneratedOnAdd();
+        });
+
+
+        modelBuilder.Entity<sas_meters_adjustment>(entity =>
+        {
+            entity.Property(e => e.tma_unique_id).ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<sas_meters_catalog>(entity =>
+        {
+            entity.Property(e => e.smc_meter_code).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<sas_meters_group>(entity =>
+        {
+            entity.Property(e => e.smg_group_id).ValueGeneratedNever();
+
+        });
+
+        modelBuilder.Entity<sequence>(entity =>
+        {
+            entity.Property(e => e.seq_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<service_internet_connection>(entity =>
+        {
+            entity.Property(e => e.sic_protocol).IsFixedLength();
+        });
+
+        modelBuilder.Entity<site>(entity =>
+        {
+            entity.Property(e => e.st_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<site_jackpot_instance>(entity =>
+        {
+            entity.Property(e => e.sji_index).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<site_service>(entity =>
+        {
+            entity.Property(e => e.ss_id).ValueGeneratedOnAdd();
+        });
+
+        modelBuilder.Entity<sph_control>(entity =>
+        {
+            entity.Property(e => e.sphc_last_play_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<stacker>(entity =>
+        {
+            entity.Property(e => e.st_stacker_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<terminal>(entity =>
+        {
+            entity.ToTable(tb =>
+                {
+                    tb.HasTrigger("TerminalProviderTrigger");
+                    tb.HasTrigger("TriggerValidateRegistrationCode");
+                });
+
+            entity.Property(e => e.te_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+
+        });
+
+        modelBuilder.Entity<terminal_denom_game>(entity =>
+        {
+            entity.Property(e => e.tdg_terminal_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<terminal_draws_recharge>(entity =>
+        {
+            entity.HasKey(e => e.tdr_id).HasName("PK_tdr_id");
+        });
+
+        modelBuilder.Entity<terminal_game_translation>(entity =>
+        {
+            entity.Property(e => e.tgt_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<terminal_sas_meter>(entity =>
+        {
+            entity.ToTable(tb => tb.HasTrigger("Trigger_TSM_Buffer_ETL"));
+        });
+
+        modelBuilder.Entity<terminal_sas_meters_history>(entity =>
+        {
+            entity.ToTable("terminal_sas_meters_history", tb => tb.HasTrigger("Trigger_TSMH_Buffer_ETL"));
+        });
+
+        modelBuilder.Entity<terminal_software_version>(entity =>
+        {
+            entity.HasKey(e => new { e.tsv_client_id, e.tsv_build_id, e.tsv_terminal_type }).HasName("PK_kiosk_software_versions");
+        });
+
+        modelBuilder.Entity<terminal_status>(entity =>
+        {
+            entity.Property(e => e.ts_terminal_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<terminal_type>(entity =>
+        {
+            entity.Property(e => e.tt_type).ValueGeneratedNever();
+            entity.Property(e => e.tt_name).IsFixedLength();
+        });
+
+        modelBuilder.Entity<terminals_connected>(entity =>
+        {
+            entity.ToTable("terminals_connected", tb => tb.HasTrigger("Trigger_ttc_buffer_ETL"));
+
+            entity.Property(e => e.tc_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+        });
+
+        modelBuilder.Entity<terminals_time_disconnected>(entity =>
+        {
+            entity.HasKey(e => new { e.ttd_site_id, e.ttd_terminal_id, e.ttd_working_day }).HasName("PK_ttd_id");
+
+            entity.ToTable("terminals_time_disconnected", tb => tb.HasTrigger("Trigger_ttd_buffer_ETL"));
+        });
+
+        modelBuilder.Entity<ticket>(entity =>
+        {
+            entity.ToTable(tb => tb.HasTrigger("Trigger_Audit_TicketStatusChange"));
+        });
+
+        modelBuilder.Entity<tickets_audit_status_change>(entity =>
+        {
+            entity.HasKey(e => new { e.tia_id, e.tia_validation_number }).HasName("PK_tickets_audit");
+
+            entity.Property(e => e.tia_id).ValueGeneratedOnAdd();
+        });
+
+
+        modelBuilder.Entity<wc2_message>(entity =>
+        {
+        });
+
+        modelBuilder.Entity<wc2_session>(entity =>
+        {
+            entity.ToTable(tb => tb.HasTrigger("Trigger_wc2_sessions_Buffer_ETL"));
+
+            entity.Property(e => e.w2s_status).HasComment("0 - Opened, 1 - Closed, 2 - Abandoned, 3 - Timeout");
+            entity.Property(e => e.w2s_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+
+        });
+
+        modelBuilder.Entity<wc2_transaction>(entity =>
+        {
+            entity.Property(e => e.w2tx_status).HasComment("0 - Running, 1 - Finished");
+
+        });
+
+        modelBuilder.Entity<wcp_command>(entity =>
+        {
+            entity.HasIndex(e => e.cmd_created, "IX_wcp_cmd_created").HasFillFactor(90);
+        });
+
+        modelBuilder.Entity<wcp_message>(entity =>
+        {
+
+        });
+
+        modelBuilder.Entity<wcp_services_to_cj_queue>(entity =>
+        {
+            entity.HasKey(e => e.wscq_service_id).HasName("PK_wcp_services_to_cj_queues_1");
+
+            entity.Property(e => e.wscq_service_id).ValueGeneratedNever();
+
+        });
+
+        modelBuilder.Entity<wcp_session>(entity =>
+        {
+            entity.ToTable(tb => tb.HasTrigger("Trigger_wcp_sessions_Buffer_ETL"));
+
+            entity.Property(e => e.ws_status).HasComment("0 - Opened, 1 - Closed, 2 - Abandoned, 3 - Timeout");
+            entity.Property(e => e.ws_timestamp)
+                .IsRowVersion()
+                .IsConcurrencyToken();
+
+        });
+
+        modelBuilder.Entity<wcp_transaction>(entity =>
+        {
+            entity.Property(e => e.wtx_status).HasComment("0 - Running, 1 - Finished");
+
+        });
+
+        modelBuilder.Entity<wkt_ad>(entity =>
+        {
+            entity.HasKey(e => e.ad_id).HasName("PK_WKT_Ads");
+        });
+
+        modelBuilder.Entity<wkt_ad_step>(entity =>
+        {
+        });
+
+        modelBuilder.Entity<wkt_ad_step_detail>(entity =>
+        {
+            entity.Property(e => e.ascr_step_id).ValueGeneratedNever();
+
+        });
+
+        modelBuilder.Entity<wkt_functionality>(entity =>
+        {
+            entity.Property(e => e.fun_function_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<wkt_image>(entity =>
+        {
+            entity.Property(e => e.cim_image_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<wkt_player_info_field>(entity =>
+        {
+            entity.Property(e => e.pif_field_id).ValueGeneratedNever();
+        });
+
+        modelBuilder.Entity<wkt_resource>(entity =>
+        {
+            entity.HasKey(e => e.res_resource_id).HasName("PK_WKT_Resources");
+        });
+
+        modelBuilder.Entity<wsp_player_recharge>(entity =>
+        {
+            entity.Property(e => e.wpr_status).HasComment("1 - Pending; 2 - In Progress; 3 - Error; 4 - Ok; 5 - Timeout");
+        });
+
+        modelBuilder.Entity<wwp_status>(entity =>
+        {
+            entity.Property(e => e.wwp_type).ValueGeneratedNever();
+        });
+
+        OnModelCreatingPartial(modelBuilder);
+    }
+
+    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

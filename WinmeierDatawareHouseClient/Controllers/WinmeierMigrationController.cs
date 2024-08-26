@@ -394,13 +394,13 @@ public class WinmeierMigrationController : ControllerBase
     {
         try
         {
-            foreach(var item in data)
-            {
-                Expression<Func<bank, bool>> predicate = c => c.bk_bank_id == item.bk_bank_id;
-                _context.InsertIfNotExists(item, predicate);
-                _context.SaveChanges();
-            }
-            return Ok(true);
+			foreach(var item in data)
+			{
+				Expression<Func<bank, bool>> predicate = c => c.bk_bank_id == item.bk_bank_id;
+				_context.InsertIfNotExists(item, predicate);
+				_context.SaveChanges();
+			}
+			return Ok(true);
         } catch(Exception ex)
         {
             _logger.LogError($"banks_save method -> " + ex.Message);

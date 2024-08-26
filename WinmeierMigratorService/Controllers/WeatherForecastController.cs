@@ -46,17 +46,24 @@ public class WeatherForecastController : ControllerBase
         var data = _context.account_documents.Take(quantity).ToArray();
         return Ok(data);
     }
-    //[HttpGet]
-    //[Route("getlist")]
-    //public IActionResult getlist(string entity,int quantity)
-    //{
-    //    // Obtén la DbSet correspondiente usando el nombre de la entidad
-    //    var dbSet = _context.GetDbSet(entity);
-    //    // Realiza consultas sobre la DbSet obtenida
-    //    var result = dbSet.OfType<object>()
-    //        .Take(quantity)
-    //        .ToList();
+	//[HttpGet]
+	//[Route("getlist")]
+	//public IActionResult getlist(string entity,int quantity)
+	//{
+	//    // Obtén la DbSet correspondiente usando el nombre de la entidad
+	//    var dbSet = _context.GetDbSet(entity);
+	//    // Realiza consultas sobre la DbSet obtenida
+	//    var result = dbSet.OfType<object>()
+	//        .Take(quantity)
+	//        .ToList();
 
-    //    return Ok(result);
-    //}
+	//    return Ok(result);
+	//}
+	[HttpGet]
+	[Route("get_banks/{quantity}")]
+	public IActionResult get_banks(int quantity)
+	{
+		var data = _context.banks.Take(quantity).ToArray();
+		return Ok(data);
+	}
 }
